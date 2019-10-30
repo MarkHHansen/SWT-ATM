@@ -6,11 +6,25 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Converter
 {
-    public class Volocity : IVolocity
+    public double CalculateVolocity(double x1, double x2, double y1, double y2, DateTime oldDateTime, DateTime newDateTime)
     {
-        public int CalculateVolocity()
-        {
-            throw new NotImplementedException();
-        }
+    double deltaX = x1 - x2;
+    double deltaY = y1 - y2;
+
+    double Timespan = deltaTime(oldDateTime, newDateTime);
+
+    double distance = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
+    double velocity = distance / Timespan;
+
+        return velocity;
+
     }
+
+    public double deltaTime(DateTime oldDateTime, DateTime newDateTime)
+    {
+    TimeSpan span = newDateTime.Subtract(oldDateTime);
+
+        return span.TotalSeconds;
+    }
+}
 }

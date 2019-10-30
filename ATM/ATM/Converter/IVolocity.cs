@@ -8,7 +8,7 @@ namespace AirTrafficMonitor.Converter
 {
     public interface IVolocity
     {
-        int CalculateVolocity();
+        double CalculateVolocity(double x1, double x2, double y1, double y2, DateTime oldDateTime, DateTime newDateTime);
 
     }
 }

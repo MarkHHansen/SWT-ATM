@@ -8,12 +8,7 @@ namespace AirTrafficMonitor.Converter
 {
     public interface ICompassCourse
     {
-        int CalculateCompassCourse()
-
-
-
-
-
+        double CalculateCompassCourse(double x1, double y1, double x2, double y2);
 
     }
 }

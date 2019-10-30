@@ -47,7 +47,7 @@
     <Compile Include="Outputvalidation_\LogSeperationEventArgs.cs" />
     <Compile Include="Outputvalidation_\OutputFilter.cs" />
     <Compile Include="Separation\CheckSeparationCondition.cs" />
-    <Compile Include="ConsoleLogger.cs" />
+    <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Converter\Airplane.cs" />
     <Compile Include="Converter\CompasCourse.cs" />
     <Compile Include="Converter\ConvertFilter.cs" />
