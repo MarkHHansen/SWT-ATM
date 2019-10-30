@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AirTrafficMonitor.Converter;
-using AirTrafficMonitor.OutputValidation;
 using AirTrafficMonitor.Separation;
-using ATM.ValidateAirplane;
 
 namespace AirTrafficMonitor.AirplaneValidation
 {
