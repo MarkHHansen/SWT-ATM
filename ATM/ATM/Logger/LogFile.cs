@@ -9,7 +9,7 @@ using AirTrafficMonitor.Separation;
 
 namespace AirTrafficMonitor.Logger
 {
-    public class LogFile : ILogger
+    public class LogFile 
     {
         private System.IO.StreamWriter file;
         public string Collision { get; set; }
