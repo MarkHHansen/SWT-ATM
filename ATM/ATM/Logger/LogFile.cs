@@ -9,7 +9,7 @@ namespace AirTrafficMonitor.Logger
 {
     public class LogFile : ILogger
     {
-        LogFile()
+        public LogFile()
         {
             MakeFolder();
         }
