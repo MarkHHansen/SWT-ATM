@@ -14,7 +14,7 @@ namespace ATM
         {
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
-            var system = 
+            
         }
 
     }
