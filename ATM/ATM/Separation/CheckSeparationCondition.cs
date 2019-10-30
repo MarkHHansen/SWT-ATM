@@ -12,12 +12,10 @@ namespace AirTrafficMonitor.Separation
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
         private int _minVertical = 300;
-
         private int _minHorizontal = 5000;
-
-        //private List<Separation> _conditions;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
         public List<Airplane> _currentAirplane { get; set; }
+        private List<SeparationCondition> _conditions;
 
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
@@ -29,7 +27,7 @@ namespace AirTrafficMonitor.Separation
             _currentAirplane = e.PlanesToValidate;
         }
 
-        public void Detect()
+        public void Detect(List<Tracks> temp)
         {
             for (int i = 0; i < _currentAirplane.Count; i++)
             {
@@ -37,8 +35,10 @@ namespace AirTrafficMonitor.Separation
                 {
                     Airplane plane1 = _currentAirplane[i];
                     Airplane plane2 = _currentAirplane[j];
-                    var time = DateTime.Compare(plane1.Time, plane2.Time) < 0 ? plane1.Time : plane2.Time;
+                    var track1 = plane1._tracks.First();
+                    var track2 = plane2._tracks.First(); 
 
+                    var time = DateTime.Compare(track1._Time, track2._Time) < 0 ? track1._Time : track2._Time;
                 }
 
             }
@@ -50,7 +50,7 @@ namespace AirTrafficMonitor.Separation
             double xPow = (Math.Pow(Math.Abs(airplane1._xCoordiante - airplane2._xCoordiante), 2));
             double distance = Math.Sqrt(xPow + yPow);
 
-            int altitude = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
+            double altitude = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
 
             if (altitude < _minVertical && distance < _minHorizontal) 
                 return true;
