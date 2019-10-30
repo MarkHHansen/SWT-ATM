@@ -14,10 +14,15 @@ namespace AirTrafficMonitor.Converter
         private List<string> transponderData = new List<string>();
 
         private ITransponderReceiver _receiver;
+        private ICompassCourse _compassCourse;
+        private IVelocity _volocity;
 
-        ConvertFilter(ITransponderReceiver receiver)
+        ConvertFilter(ITransponderReceiver receiver, ICompassCourse compassCourse, IVelocity velocity)
         {
             this._receiver = receiver;
+            this._compassCourse = compassCourse;
+            this._volocity = velocity;
+
 
             this.receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
         }
@@ -31,8 +36,7 @@ namespace AirTrafficMonitor.Converter
 
         //event Source
 
-        private List<Airplane> oldAirplane = new List<Airplane>();
-        private List<Tracks> oldTracks = new List<Tracks>();
+        private List<Airplane> oldAirplanes = new List<Airplane>();
         public event EventHandler<ConvertEventArgs> ConvertedDataEvent;
 
         public void convertdata(List<string> transponderData)
@@ -42,22 +46,35 @@ namespace AirTrafficMonitor.Converter
             foreach (var data in this.transponderData)
             {
                 string[] dataStrings = data.Split(';');
-                Tracks track = new Tracks();
+                
                 Airplane airplane = new Airplane();
 
                 airplane._tag = dataStrings[0];
 
-                track._xCoordiante = Convert.ToDouble(dataStrings[1]);
+                airplane._xCoordiante = Convert.ToDouble(dataStrings[1]);
                     
-                track._yCoordiante = Convert.ToDouble(dataStrings[2]);
+                airplane._yCoordiante = Convert.ToDouble(dataStrings[2]);
 
-                track._Altitude = Convert.ToDouble(dataStrings[3]);
+                airplane._Altitude = Convert.ToDouble(dataStrings[3]);
 
-                track._Time = DateTime.ParseExact(dataStrings[4], "yyyy-mm-dd-hh-mm-ss-ff", null);
+                airplane._Time = DateTime.ParseExact(dataStrings[4], "yyyy-mm-dd-hh-mm-ss-ff", null);
 
-                airplane._tracks.Add(track);
+                foreach (Airplane plane in oldAirplanes)
+                {
+                    if (airplane._tag == plane._tag)
+                    {
+                        airplane._velocity = _volocity.CalculateVolocity(plane._xCoordiante, airplane._xCoordiante,
+                            plane._yCoordiante, airplane._yCoordiante, plane._Time, airplane._Time);
+                        airplane._compasCourse = _compassCourse.CalculateCompassCourse(plane._xCoordiante,
+                            plane._yCoordiante, airplane._xCoordiante, airplane._yCoordiante);
+                    }
+                }
 
+                airplanes.Add(airplane);
             }
+
+            OnConvertedDataEvent(new ConvertEventArgs(airplanes));
+            oldAirplanes = airplanes;
 
         }
 

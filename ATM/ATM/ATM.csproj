@@ -52,10 +52,9 @@
     <Compile Include="Converter\CompasCourse.cs" />
     <Compile Include="Converter\ConvertFilter.cs" />
     <Compile Include="Converter\DataConvertEventArgs.cs" />
-    <Compile Include="Converter\IAirplane.cs" />
     <Compile Include="Converter\ICompassCourse.cs" />
-    <Compile Include="Converter\IVolocity.cs" />
-    <Compile Include="Converter\Volocity.cs" />
+    <Compile Include="Converter\IVelocity.cs" />
+    <Compile Include="Converter\Velocity.cs" />
     <Compile Include="Converter\IConvertFilter.cs" />
     <Compile Include="Separation\ICheckSeparationCondition.cs" />
     <Compile Include="Logger\ILogger.cs" />
