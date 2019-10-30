@@ -9,13 +9,13 @@ namespace AirTrafficMonitor.Converter
 {
     public class Airplane : IAirplane
     {
-        public Airplane(string tag, double velocity, int course, List<Tracks> tracks, bool SeperationCodition)
+        public Airplane(/*string tag, double velocity, int course, List<Tracks> tracks, bool SeperationCodition*/)
         {
-            _tag = tag;
-            _velocity = velocity;
-            _compasCourse = course;
-            _tracks = tracks;
-            _seperationCodition = SeperationCodition;
+            //_tag = tag;
+            //_velocity = velocity;
+            //_compasCourse = course;
+            //_tracks = tracks;
+            //_seperationCodition = SeperationCodition;
         }
         public string _tag
         {
@@ -35,17 +35,19 @@ namespace AirTrafficMonitor.Converter
             set => _compasCourse = value;
         }
 
-        public List<Tracks> _tracks
-        {
-            get => _tracks;
-            set => _tracks = value;
-        }
-
         public bool _seperationCodition
         {
             get => _seperationCodition;
             set => _seperationCodition = value;
         }
+
+        public double _xCoordiante { get; set; }
+
+        public double _yCoordiante { get; set; }
+
+        public double _Altitude { get; set; }
+
+        public DateTime _Time { get; set; }
 
     }
 }
