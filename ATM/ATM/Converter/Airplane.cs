@@ -29,7 +29,7 @@ namespace AirTrafficMonitor.Converter
             set => _velocity = value;
         }
 
-        public int _compasCourse
+        public double _compasCourse
         {
             get => _compasCourse;
             set => _compasCourse = value;

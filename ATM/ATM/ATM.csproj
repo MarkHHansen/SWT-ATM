@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Outputvalidation_\IOutputFilter.cs" />
+    <Compile Include="Outputvalidation_\LogSeperationEventArgs.cs" />
+    <Compile Include="Outputvalidation_\OutputFilter.cs" />
     <Compile Include="Separation\CheckSeparationCondition.cs" />
     <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Converter\Airplane.cs" />
@@ -58,7 +61,7 @@
     <Compile Include="Separation\ICheckSeparationCondition.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\LogFile.cs" />
-    <Compile Include="Logger\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Separation\SeparationCondition.cs" />
     <Compile Include="Separation\SeparationEventArgs.cs" />
@@ -70,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
