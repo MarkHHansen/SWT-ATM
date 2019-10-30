@@ -10,9 +10,9 @@ namespace AirTrafficMonitor.Logger
     {
         public void Print(List<string> airplanes)
         {
-            foreach (object o in airplanes)
+            foreach (var plane in airplanes)
             {
-                Console.WriteLine(o);
+                Console.WriteLine(plane);
 
             }
         }

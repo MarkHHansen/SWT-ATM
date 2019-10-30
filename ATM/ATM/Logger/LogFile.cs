@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace AirTrafficMonitor.Logger
 {
     public class LogFile : ILogger
     {
-        LogFile()
+        public LogFile()
         {
-
+            MakeFolder();
         }
         public void Print(List<string> airplanes)
         {
