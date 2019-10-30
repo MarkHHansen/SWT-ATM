@@ -9,6 +9,6 @@ namespace AirTrafficMonitor.Logger
 {
     public interface ILogger
     {
-        void Print(List<string> airplanes); 
+        //void Print(List<string> airplanes); 
     }
 }

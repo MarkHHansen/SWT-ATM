@@ -17,12 +17,12 @@ namespace AirTrafficMonitor.Separation
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
         public List<Airplane> _currentAirplane { get; set; }
-        private List<SeparationCondition> _conditions;
+        public List<SeparationCondition> Conditions;
 
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
             plane.ValidationEvent += HandleAirplaneValidationEvent;
-            _conditions = new List<SeparationCondition>();
+            Conditions = new List<SeparationCondition>();
         }
 
         private void HandleAirplaneValidationEvent(object sender, ValidationEventArgs e)
@@ -45,37 +45,36 @@ namespace AirTrafficMonitor.Separation
                     Tuple<Airplane, Airplane> newPair = new Tuple<Airplane, Airplane>(plane1, plane2);
                     SeparationCondition newCond = new SeparationCondition(time, newPair);
 
-                    // If planes are colliding, either add it to list og ignore it, because it is already there
+                    // Hvis de er på koalitonskurs tilføj eller ikke tilføj 
                     if (CheckForCollission(plane1, plane2) == true)
                     {
                         bool isFound = false;
-                        for (int k = 0; k < _conditions.Count; k++)
+                        for (int k = 0; k < Conditions.Count; k++)
                         {
-                            if (newCond.Equals(_conditions[k]))
+                            if (newCond.Equals(Conditions[k]))
                             {
                                 isFound = true;
                             }
                         }
-                        // First time - log it
-                        if (!isFound)
+                        //Lav log hvis registreringen sker første gang
+                        if (isFound == false)
                         {
                             _logfile.Print(new List<string>());
-                            _conditions.Add(newCond);
+                            Conditions.Add(newCond);
                         }
                     }
                     // If not colliding check if it was before and then remove it from list
                     else
                     {
-                        for (int k = 0; k < _conditions.Count; k++)
+                        for (int k = 0; k < Conditions.Count; k++)
                         {
-                            if (newCond.Equals(_conditions[k]))
+                            if (newCond.Equals(Conditions[k]))
                             {
-                                _conditions.Remove(_conditions[k]);
+                                Conditions.Remove(Conditions[k]);
                             }
                         }
                     }
                 }
-
             }
         }
 
