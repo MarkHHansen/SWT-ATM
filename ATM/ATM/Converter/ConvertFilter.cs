@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiver;
 
 namespace AirTrafficMonitor.Converter
 {
@@ -24,7 +25,7 @@ namespace AirTrafficMonitor.Converter
             this._volocity = velocity;
 
 
-            this.receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
+            this._receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
         }
 
         private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
