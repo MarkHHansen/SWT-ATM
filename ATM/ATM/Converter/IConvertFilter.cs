@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Converter
 {
-    public interface ICompassCourse
+    public interface IConvertFilter
     {
-        int CalculateCompassCourse()
-
-
-
-
-
-
+        event EventHandler<ConvertEventArgs> ConvertedDataEvent;
     }
 }

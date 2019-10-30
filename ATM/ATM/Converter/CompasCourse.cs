@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATM.Converter
+namespace AirTrafficMonitor.Converter
 {
-    class CompasCourse
+    public class CompasCourse : ICompassCourse
     {
+        public int CalculateCompassCourse()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
