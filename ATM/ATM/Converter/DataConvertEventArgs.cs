@@ -8,8 +8,11 @@ namespace AirTrafficMonitor.Converter
 {
     public class ConvertEventArgs : EventArgs
     {
-        public ConvertEventArgs(List<Airplane> convertedData) { }
-
         public List<Airplane> ConvertedData { get; set; }
+
+        public ConvertEventArgs(List<Airplane> convertedData)
+        {
+            ConvertedData = convertedData;
+        }
     }
 }

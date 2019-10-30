@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Converter
 {
-    public interface IVolocity
+    public interface IVelocity
     {
         double CalculateVolocity(double x1, double x2, double y1, double y2, DateTime oldDateTime, DateTime newDateTime);
 
