@@ -31,12 +31,21 @@ namespace AirTrafficMonitor.Converter
 
         //event Source
 
-        private List<Tracks> oldtracks = new List<Tracks>();
+        private List<Airplane> oldAirplane = new List<Airplane>();
+        private List<Tracks> oldTracks = new List<Tracks>();
         public event EventHandler<ConvertEventArgs> ConvertedDataEvent;
 
         public void convertdata(List<string> transponderData)
         {
-            // skriv kode for at lave en string til et track objekt.
+            List<Tracks> tracks = new List<Tracks>();
+
+            foreach (var data in this.transponderData)
+            {
+                string[] dataStrings = data.Split(';');
+                Tracks track = new Tracks();
+
+                track.Tag
+            }
 
         }
 

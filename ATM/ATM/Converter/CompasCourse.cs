@@ -8,9 +8,12 @@ namespace AirTrafficMonitor.Converter
 {
     public class CompasCourse : ICompassCourse
     {
-        public int CalculateCompassCourse()
+        public double CalculateCompassCourse(double x1, double y1, double x2, double y2)
         {
-            throw new NotImplementedException();
+            double deltaX = x2 - x1;
+            double deltaY = y2 - y1;
+
+            return Math.Atan2(deltaY, deltaX) * (180 / Math.PI);
         }
     }
 }

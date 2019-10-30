@@ -8,8 +8,9 @@ namespace AirTrafficMonitor.Converter
 {
     public class Tracks
     {
-        public int _xCoordiante { get; set; }
-        public int _yCoordiante { get; set; }
-        public int _Altitude { get; set; }
+        public double _xCoordiante { get; set; }
+        public double _yCoordiante { get; set; }
+        public double _Altitude { get; set; }
+        public DateTime _Time { get; set; }
     }
 }

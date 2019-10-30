@@ -13,7 +13,7 @@ namespace AirTrafficMonitor.Converter
 
         double _velocity { get; set; }
 
-        int _compasCourse { get; set; }
+        double _compasCourse { get; set; }
 
         List<Tracks> _tracks { get; set; }
 
