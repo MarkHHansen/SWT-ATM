@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATM.ValidateAirplane
+namespace AirTrafficMonitor.AirplaneValidation
 {
-    interface IAirplaneValidation
+    public interface IAirplaneValidation
     {
+        event EventHandler<ValidationEventArgs> ValidationEvent;
     }
 }

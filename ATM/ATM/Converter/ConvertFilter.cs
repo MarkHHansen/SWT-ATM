@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor.AirplaneValidation
+namespace ATM.Converter
 {
-    interface IAirspace
+    class ConvertFilter
     {
-        int[] getAirspaceLimits();
     }
 }
