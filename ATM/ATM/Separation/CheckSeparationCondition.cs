@@ -12,19 +12,23 @@ namespace AirTrafficMonitor.Separation
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
         private int _minVertical = 300;
+
         private int _minHorizontal = 5000;
+
         //private List<Separation> _conditions;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
         public List<Airplane> _currentAirplane { get; set; }
 
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
-            plane.ValidationEvent += HandleAirplaneValidationEvent; 
+            plane.ValidationEvent += HandleAirplaneValidationEvent;
         }
-        private void HandleAirplaneValidationEvent (object sender, ValidationEventArgs e)
+
+        private void HandleAirplaneValidationEvent(object sender, ValidationEventArgs e)
         {
             _currentAirplane = e.PlanesToValidate;
         }
+
         public void Detect()
         {
             for (int i = 0; i < _currentAirplane.Count; i++)
@@ -39,27 +43,19 @@ namespace AirTrafficMonitor.Separation
 
             }
         }
-        public int GetAltitudeDelta(Airplane t1, Airplane t2)
+
+        public bool CheckForCollission(Tracks airplane1, Tracks airplane2)
         {
-            double delta = t1._Altitude - t2.Altitude;
+            double yPow = (Math.Pow(Math.Abs(airplane1._yCoordiante - airplane2._yCoordiante), 2));
+            double xPow = (Math.Pow(Math.Abs(airplane1._xCoordiante - airplane2._xCoordiante), 2));
+            double distance = Math.Sqrt(xPow + yPow);
 
-            if (delta < 0)
-                delta = delta * (-1);
-            return Convert.ToInt32(delta);
-        }
+            int altitude = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
 
-        public int GetDistance(Track t1, Track t2)
-        {
-            var deltaX = t1.PositionX - t2.PositionX;
-            var deltaY = t1.PositionY - t2.PositionY;
-
-            int result = Convert.ToInt32(Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2)));
-
-            return result;
-        }
-        public void CheckForCollission(IAirplane airplane1, IAirplane airplane2)
-        {
-
+            if (altitude < _minVertical && distance < _minHorizontal) 
+                return true;
+            
+            return false;
         }
     }
 }
