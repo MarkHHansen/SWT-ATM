@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Separation\CheckSeparationCondition.cs" />
+    <Compile Include="ConsoleLogger.cs" />
     <Compile Include="Converter\Airplane.cs" />
     <Compile Include="Converter\CompasCourse.cs" />
     <Compile Include="Converter\ConvertFilter.cs" />
@@ -53,8 +55,13 @@
     <Compile Include="Converter\Tracks.cs" />
     <Compile Include="Converter\Volocity.cs" />
     <Compile Include="Converter\IConvertFilter.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Separation\ICheckSeparationCondition.cs" />
+    <Compile Include="Logger\ILogger.cs" />
+    <Compile Include="Logger\LogFile.cs" />
+    <Compile Include="Logger\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Separation\SeparationCondition.cs" />
+    <Compile Include="Separation\SeparationEventArgs.cs" />
     <Compile Include="ValidateAirplane\AirplaneValidation.cs" />
     <Compile Include="ValidateAirplane\Airspace.cs" />
     <Compile Include="ValidateAirplane\IAirplaneValidation.cs" />
