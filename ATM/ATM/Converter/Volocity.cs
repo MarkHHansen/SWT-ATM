@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Converter
 {
-    public interface ICompassCourse
+    public class Volocity : IVolocity
     {
-        int CalculateCompassCourse()
-
-
-
-
-
-
+        public int CalculateVolocity()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

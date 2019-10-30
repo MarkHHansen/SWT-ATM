@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATM.Converter
+namespace AirTrafficMonitor.Converter
 {
-    interface IVelocity
+    public interface IVolocity
     {
+        int CalculateVolocity();
+
     }
 }

@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Converter
 {
-    public interface ICompassCourse
+    public class Tracks
     {
-        int CalculateCompassCourse()
-
-
-
-
-
-
+        public int _xCoordiante { get; set; }
+        public int _yCoordiante { get; set; }
+        public int _Altitude { get; set; }
     }
 }

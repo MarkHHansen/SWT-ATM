@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATM.Converter
+namespace AirTrafficMonitor.Converter
 {
-    class DataConvertEventArgs
+    public class ConvertEventArgs : EventArgs
     {
+        public ConvertEventArgs(List<Tracks> convertedData) { }
+
+        public List<Tracks> ConvertedData { get; set; }
     }
 }

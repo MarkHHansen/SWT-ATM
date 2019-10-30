@@ -49,10 +49,10 @@
     <Compile Include="Converter\DataConvertEventArgs.cs" />
     <Compile Include="Converter\IAirplane.cs" />
     <Compile Include="Converter\ICompassCourse.cs" />
-    <Compile Include="Converter\IVelocity.cs" />
-    <Compile Include="OutputValidation\IOutputFilter.cs" />
-    <Compile Include="OutputValidation\LogSeperationEventArgs.cs" />
-    <Compile Include="OutputValidation\OutputFilter.cs" />
+    <Compile Include="Converter\IVolocity.cs" />
+    <Compile Include="Converter\Tracks.cs" />
+    <Compile Include="Converter\Volocity.cs" />
+    <Compile Include="Converter\IConvertFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidateAirplane\AirplaneValidation.cs" />
