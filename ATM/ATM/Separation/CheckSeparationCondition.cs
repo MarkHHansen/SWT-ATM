@@ -13,6 +13,7 @@ namespace AirTrafficMonitor.Separation
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
         LogFile _logfile = new LogFile();
+        private ConsoleLogger print; 
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
@@ -59,11 +60,16 @@ namespace AirTrafficMonitor.Separation
                         //Lav log hvis registreringen sker første gang
                         if (isFound == false)
                         {
-                            _logfile.Print(new List<string>());
+                            _logfile.LogCollision(new List<string>()
+                            {
+                                "Timestamp: " + newCond.Time + "Between plane: " + newCond.Pair.Item1._tag + "and" + newCond.Pair.Item2._tag 
+                            });
+
                             Conditions.Add(newCond);
+                            print.PrintCollision();
                         }
                     }
-                    // If not colliding check if it was before and then remove it from list
+                    // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
                     else
                     {
                         for (int k = 0; k < Conditions.Count; k++)
