@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Converter
 {
-    public interface IAirplane
+     public interface IAirplane
     {
         string _tag { get; set; }
 
@@ -15,8 +15,14 @@ namespace AirTrafficMonitor.Converter
 
         double _compasCourse { get; set; }
 
-        List<Tracks> _tracks { get; set; }
-
         bool _seperationCodition { get; set; }
+
+        double _xCoordiante { get; set; }
+
+        double _yCoordiante { get; set; }
+
+        double _Altitude { get; set; }
+
+        DateTime _Time { get; set; }
     }
 }

@@ -37,14 +37,26 @@ namespace AirTrafficMonitor.Converter
 
         public void convertdata(List<string> transponderData)
         {
-            List<Tracks> tracks = new List<Tracks>();
+            List<Airplane> airplanes = new List<Airplane>();
 
             foreach (var data in this.transponderData)
             {
                 string[] dataStrings = data.Split(';');
                 Tracks track = new Tracks();
+                Airplane airplane = new Airplane();
 
-                track.Tag
+                airplane._tag = dataStrings[0];
+
+                track._xCoordiante = Convert.ToDouble(dataStrings[1]);
+                    
+                track._yCoordiante = Convert.ToDouble(dataStrings[2]);
+
+                track._Altitude = Convert.ToDouble(dataStrings[3]);
+
+                track._Time = DateTime.ParseExact(dataStrings[4], "yyyy-mm-dd-hh-mm-ss-ff", null);
+
+                airplane._tracks.Add(track);
+
             }
 
         }
