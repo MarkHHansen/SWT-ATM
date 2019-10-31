@@ -77,7 +77,7 @@ namespace ATM.Separation
                     // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
                     //for (int k = 0; k <= Conditions.Count; k++)
                     //{
-                    //    if (!newCondition.Equals(Conditions[k]))
+                    //    if (newCondition.Equals(Conditions[k]))
                     //    {
                     //        Conditions.Remove(Conditions[k]);
                     //    }
