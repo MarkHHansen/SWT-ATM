@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
 
-namespace AirTrafficMonitor.Converter
+namespace ATM.Converter
 {
     public class ConvertFilter : IConvertFilter
     {

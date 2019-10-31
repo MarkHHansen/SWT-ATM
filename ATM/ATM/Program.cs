@@ -4,18 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
-using AirTrafficMonitor.Separation;
-using AirTrafficMonitor.Converter;
-using AirTrafficMonitor.AirplaneValidation;
-using AirTrafficMonitor.Logger;
+using ATM.Separation;
+using ATM.Converter;
+using ATM.ValidateAirplane;
+using ATM.Logger;
 
-namespace AirTrafficMonitor
+namespace ATM
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
+
+           
+
+            
         }
 
     }

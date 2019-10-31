@@ -4,11 +4,11 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using AirTrafficMonitor.AirplaneValidation;
-using AirTrafficMonitor.Converter;
-using AirTrafficMonitor.Logger;
+using ATM.ValidateAirplane;
+using ATM.Converter;
+using ATM.Logger;
 
-namespace AirTrafficMonitor.Separation
+namespace ATM.Separation
 {
     public class CheckSeparationCondition : ICheckSeparationCondition
     {

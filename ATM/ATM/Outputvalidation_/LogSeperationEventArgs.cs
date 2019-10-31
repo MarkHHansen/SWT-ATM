@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AirTrafficMonitor.Converter;
+using ATM.Converter;
 
 
-namespace ATM.OutputValidation
+namespace ATM.OutputValidation_
 {
     public class LogSeperationEventArgs : EventArgs
     {
