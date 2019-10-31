@@ -17,7 +17,7 @@ namespace ATM.Separation
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
-        public List<Airplane> _currentAirplane { get; set; }
+        //public List<Airplane> _currentAirplane { get; set; }
         public List<SeparationCondition> Conditions;
 
         public CheckSeparationCondition(IAirplaneValidation plane)
@@ -28,38 +28,22 @@ namespace ATM.Separation
 
         private void HandleAirplaneValidationEvent(object sender, ValidationEventArgs e)
         {
-            _currentAirplane = e.PlanesToValidate;
-            DetectCollisions();
+            List<Airplane> currentAirplane = e.PlanesToValidate;
+            DetectCollisions(currentAirplane);
         }
 
-        public void DetectCollisions()
+        public void DetectCollisions(List<Airplane> valAirplanes)
         {
-            if (_currentAirplane.Count > 1)
+            foreach (var plane1 in valAirplanes)
             {
-                for (int i = 1; i < 2; i++)
+                foreach (var plane2 in valAirplanes)
                 {
-                    Airplane plane1 = _currentAirplane[i];
-                    Airplane plane2 = _currentAirplane[i - 1];
-
                     var time = DateTime.Compare(plane1._Time, plane2._Time) < 0 ? plane1._Time : plane2._Time;
-
                     Tuple<Airplane, Airplane> newPair = new Tuple<Airplane, Airplane>(plane1, plane2);
                     SeparationCondition newCondition = new SeparationCondition(time, newPair);
-
-                    // Hvis de er på koalitonskurs tilføj eller ikke tilføj 
-                    if (CheckForCollision(plane1, plane2) == true)
+                    if (plane1._tag != plane2._tag)
                     {
-                        bool newCollision = false;
-                        for (int k = 1; k <= Conditions.Count; k++)
-                        {
-                            if (newCondition.Equals(Conditions[k]))
-                            {
-                                newCollision = true;
-                            }
-                        }
-
-                        //Lav log hvis registreringen sker første gang
-                        if (newCollision == false)
+                        if (CheckForCollision(plane1, plane2))
                         {
                             _logfile.LogCollision(new List<string>()
                             {
@@ -69,29 +53,12 @@ namespace ATM.Separation
 
                             Conditions.Add(newCondition);
                         }
-
-                        //_consolelogger.PrintCollision();
-                        Conditions.Remove(newCondition);
                     }
 
-                    // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
-                    //for (int k = 0; k <= Conditions.Count; k++)
-                    //{
-                    //    if (newCondition.Equals(Conditions[k]))
-                    //    {
-                    //        Conditions.Remove(Conditions[k]);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    for (int k = 0; k < Conditions.Count; k++)
-                    //    {
-                    //        if (newCondition.Equals(Conditions[k]))
-                    //        {
-                    //            Conditions.Remove(Conditions[k]);
-                    //        }
-                    //    }
-                    //}
+                    if (!newCondition.Equals(Conditions))
+                    {
+                        Conditions.Remove(newCondition);
+                    }
                 }
             }
         }
