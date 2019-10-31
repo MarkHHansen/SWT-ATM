@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitor.Converter;
 
-namespace ATM.OutputValidation
+
+namespace ATM.OutputValidation_
 {
     public class LogSeperationEventArgs : EventArgs
     {

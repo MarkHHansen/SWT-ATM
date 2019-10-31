@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.ValidateAirplane;
+using ATM.Converter;
+using ATM.Logger;
 
-namespace ATM.OutputValidation
+namespace ATM.OutputValidation_
 {
     class OutputFilter
     {
         private ILogger _consoleLogger;
         private ILogger _ILogger;
         private List<Airplane> _oldplane;
+        private IAirplaneValidation _airplaneValidation;
 
 
         //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
@@ -41,7 +45,9 @@ namespace ATM.OutputValidation
 
         public OutputFilter(IAirplaneValidation airplaneValidation)
         {
-            airplaneValidation.ValidationEvent += HandleValidationEvent;
+            this._airplaneValidation = airplaneValidation;
+
+            _airplaneValidation.ValidationEvent += HandleValidationEvent;
         }
 
         private void HandleValidationEvent(object sender, ValidationEventArgs e)
