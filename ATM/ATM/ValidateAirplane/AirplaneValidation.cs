@@ -13,8 +13,7 @@ namespace ATM.ValidateAirplane
         private Airspace _airspace = new Airspace();
 
         public event EventHandler<ValidationEventArgs> ValidationEvent;
-        //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
-        //public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
+        public event EventHandler<ConvertEventArgs> ConvertedDataEvent;
 
         public AirplaneValidation(IConvertFilter receiver)
         {

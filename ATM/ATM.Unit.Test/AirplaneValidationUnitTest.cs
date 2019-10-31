@@ -29,25 +29,23 @@ namespace ATM.Unit.Test
         }
 
         [Test]
-        public void AirplaneChanged_CurrentAirplaneIsCorrect(List<Airplane> a)
+        public void AirplaneChanged_CurrentAirplaneIsCorrect()
         {
             List<Airplane> temp = new List<Airplane>();
             Airplane airplane = new Airplane();
-            airplane._yCoordiante = 20000;
+            airplane._yCoordiante = 23456;
             airplane._xCoordiante = 30000;
             airplane._Altitude = 2000;
             airplane._compasCourse = 60.0;
             airplane._velocity = 1000.0;
             airplane._Time =
                 DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
-            airplane._tag = "SHITAS";
-            airplane._seperationCodition = false;
 
             temp.Add(airplane);
 
-            _tempRec.ConvertedDataEvent += Raise.EventWith(this,new ConvertEventArgs(temp));
+            _tempRec.ConvertedDataEvent += Raise.EventWith(this, new ConvertEventArgs(temp));
 
-            Assert.That(_receivedEventArgs, Is.Not.Null);
+            Assert.That(_receivedEventArgs.ConvertedData, Is.Not.Null);
         }
     }
 }
