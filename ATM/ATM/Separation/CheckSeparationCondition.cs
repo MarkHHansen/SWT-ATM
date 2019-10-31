@@ -34,11 +34,11 @@ namespace ATM.Separation
 
         public void DetectCollisions()
         {
-            for (int i = 0; i < _currentAirplane.Count; i++)
+            for (int i = 0; i < 2; i++)
             {
-                if (_currentAirplane.Count > 1 )
+                if (_currentAirplane.Count < 1 )
                 {
-                    for (int j = i + 1; j <= _currentAirplane.Count; j++)
+                    for (int j = i + 1; j <= 2; j++)
                     {
                         Airplane plane1 = _currentAirplane[i];
                         Airplane plane2 = _currentAirplane[j];
@@ -70,15 +70,16 @@ namespace ATM.Separation
                                 Conditions.Add(newCondition);
                             }
                             _consolelogger.PrintCollision();
+                            Conditions.Remove(newCondition);
                         }
                         // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
-                        for (int k = 0; k <= Conditions.Count; k++)
-                        {
-                            if (!newCondition.Equals(Conditions[k]))
-                            {
-                                Conditions.Remove(Conditions[k]);
-                            }
-                        }
+                        //for (int k = 0; k <= Conditions.Count; k++)
+                        //{
+                        //    if (!newCondition.Equals(Conditions[k]))
+                        //    {
+                        //        Conditions.Remove(Conditions[k]);
+                        //    }
+                        //}
                         //else
                         //{
                         //    for (int k = 0; k < Conditions.Count; k++)

@@ -18,7 +18,7 @@ namespace ATM.Unit.Test
         [SetUp]
         public void SetUp()
         {
-            uut = new Airspace();
+            //uut = new Airspace();
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace ATM.Unit.Test
         {
             int[] result = {20000, 500, 90000, 10000, 90000, 10000};
 
-            Assert.That(uut.Ge)
+            //Assert.That(uut.Ge)
         }
     }
 }
