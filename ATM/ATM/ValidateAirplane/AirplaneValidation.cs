@@ -6,12 +6,13 @@ using ATM.OutputValidation_;
 
 namespace ATM.ValidateAirplane
 {
-    class AirplaneValidation
+    public class AirplaneValidation : IAirplaneValidation
     {
         private IConvertFilter _receiver;
         private List<Airplane> Validated;
         private IAirspace _airspace;
 
+        public event EventHandler<ValidationEventArgs> ValidationEvent;
         public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
 
@@ -82,5 +83,6 @@ namespace ATM.ValidateAirplane
             LogSeperationEvent?.Invoke(this, els);
         }
 
+        
     }
 }

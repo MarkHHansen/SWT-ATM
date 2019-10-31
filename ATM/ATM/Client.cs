@@ -16,9 +16,9 @@ namespace ATM
     {
         private ConvertFilter _convertFilter;
         private AirplaneValidation _airplaneValidation;
-        private SeparationCondition _separationCondition;
+        private CheckSeparationCondition _separationCondition;
         private OutputFilter _outputFilter;
-        
+
 
         public Client()
         {
@@ -26,8 +26,8 @@ namespace ATM
             _convertFilter = new ConvertFilter(receiver, new CompasCourse(), new Velocity());
             _airplaneValidation = new AirplaneValidation(_convertFilter);
             _outputFilter = new OutputFilter(_airplaneValidation);
-            _separationCondition = new SeparationCondition();
+            _separationCondition = new CheckSeparationCondition(_airplaneValidation);
 
         }
-
+    }
 }
