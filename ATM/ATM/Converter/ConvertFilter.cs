@@ -45,7 +45,7 @@ namespace ATM.Converter
 
         public void convertdata(List<string> transponderData)
         {
-            //List<Airplane> airplanes = new List<Airplane>();
+            List<Airplane> airplanes = new List<Airplane>();
 
             foreach (var data in this.transponderData)
             {
@@ -84,12 +84,12 @@ namespace ATM.Converter
                     }
                 }
 
-                //airplanes.Add(airplane);
+                airplanes.Add(airplane);
             }
 
-            OnConvertedDataEvent(new ConvertEventArgs(oldAirplanes));
-            //OnConvertedDataEvent(new ConvertEventArgs(airplanes));
-            //oldAirplanes = airplanes;
+            //OnConvertedDataEvent(new ConvertEventArgs(oldAirplanes));
+            OnConvertedDataEvent(new ConvertEventArgs(airplanes));
+            oldAirplanes = airplanes;
         }
 
         protected virtual void OnConvertedDataEvent(ConvertEventArgs e)
