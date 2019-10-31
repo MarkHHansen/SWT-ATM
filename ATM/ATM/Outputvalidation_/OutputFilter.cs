@@ -9,7 +9,7 @@ using ATM.Logger;
 
 namespace ATM.OutputValidation_
 {
-    class OutputFilter
+    public class OutputFilter
     {
         private ILogger _consoleLogger;
         private ILogger _ILogger;
