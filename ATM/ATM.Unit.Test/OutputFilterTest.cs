@@ -10,6 +10,6 @@ namespace ATM.Unit.Test
     class OutputFilterTest
     {
         private OutputFilter _uut;
-        private 
+
     }
 }
