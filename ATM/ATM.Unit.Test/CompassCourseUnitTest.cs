@@ -21,7 +21,6 @@ namespace ATM.Unit.Test
             //arrange
             _uut = new CompasCourse();
         }
-
         [Test]
         public void Test_CalculateCompassCourse()
         {
@@ -31,6 +30,5 @@ namespace ATM.Unit.Test
             //assert
             Assert.That(Course, Is.EqualTo(56.309932474020213086));
         }
-
     }
 }
