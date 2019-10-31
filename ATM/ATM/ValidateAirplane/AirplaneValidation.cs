@@ -9,9 +9,10 @@ namespace ATM.ValidateAirplane
     public class AirplaneValidation : IAirplaneValidation
     {
         private IConvertFilter _receiver;
-        private List<Airplane> Validated;
+        private List<Airplane> Validated { get; set; }
         private Airspace _airspace = new Airspace();
 
+        public event EventHandler<ConvertEventArgs> ConvertedDataEvent;
         public event EventHandler<ValidationEventArgs> ValidationEvent;
         //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
         //public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
@@ -43,10 +44,7 @@ namespace ATM.ValidateAirplane
                     }
                 }
             }
-
-            
-                OnCheckSeperationCondition(new ValidationEventArgs(Validated));
-            
+            OnCheckSeperationCondition(new ValidationEventArgs(Validated));
         }
 
         //private void Validate(object s, ValidationEventArgs e)
