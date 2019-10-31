@@ -45,7 +45,7 @@ namespace ATM.ValidateAirplane
             }
 
             
-                OnCheckSeperationCondition(new ValidationEventArgs(Validated));
+            OnCheckSeperationCondition(new ValidationEventArgs(Validated));
             
         }
 
@@ -79,7 +79,7 @@ namespace ATM.ValidateAirplane
         protected virtual void OnCheckSeperationCondition(ValidationEventArgs event_)
         {
             ValidationEvent?.Invoke(this,event_);
-            Console.WriteLine("tis");
+            //Console.WriteLine("tis");
         }
 
         
