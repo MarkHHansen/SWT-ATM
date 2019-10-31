@@ -21,6 +21,8 @@ namespace ATM.Logger
 
         public void LogCollision(List<string> messages)
         {
+            MakeFolder();
+            MakeFile();
             for (int i = 0; i < messages.Count; i++)
             {
                 file.WriteLine(messages[i]);
