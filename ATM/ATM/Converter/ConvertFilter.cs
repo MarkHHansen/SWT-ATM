@@ -15,7 +15,7 @@ namespace ATM.Converter
 
         private List<string> transponderData = new List<string>();
 
-        private ITransponderReceiver _receiver;
+        public ITransponderReceiver _receiver;
         private ICompassCourse _compassCourse;
         private IVelocity _volocity;
 
@@ -24,16 +24,12 @@ namespace ATM.Converter
             this._receiver = receiver;
             this._compassCourse = compassCourse;
             this._volocity = velocity;
-
-
             this._receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
         }
 
         private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             transponderData = e.TransponderData;
-            
-            
             convertdata(transponderData);
         }
 

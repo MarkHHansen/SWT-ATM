@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiver;
 using ATM.Converter;
 
+
 namespace ATM.Unit.Test
 {
-    [TestClass]
+    [TestFixture]
     public class ConvertFilterUnitTest
     {
         private ConvertFilter _uut;
-        private ConvertEventArgs _receivedEventArgs;
+        private RawTransponderDataEventArgs _dataEventArgs;
         private ITransponderReceiver _fakereceiver;
         private ICompassCourse _fakecompassCourse;
         private IVelocity _fakevelocity;
@@ -24,25 +24,27 @@ namespace ATM.Unit.Test
             _fakecompassCourse = Substitute.For<ICompassCourse>();
             _fakevelocity = Substitute.For<IVelocity>();
 
-            //_uut = new ConvertFilter(_receiver, _compassCourse, _velocity);
+            _uut = new ConvertFilter(_fakereceiver, _fakecompassCourse, _fakevelocity);
         }
 
 
-        [TestMethod]
+        [Test]
         public void TestEvent()
         {
-            // Setup test data
+            // Arrange
             List<string> testData = new List<string>();
             testData.Add("ATR423;39045;12932;14000;20151006213456789");
             testData.Add("BCD123;10005;85890;12000;20151006213456789");
             testData.Add("XYZ987;25059;75654;4000;20151006213456789");
+
+            _uut._receiver.TransponderDataReady += (o, e) => { _dataEventArgs = e; };
 
             // Act: Trigger the fake object to execute event invocation
             _fakereceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
             // Assert something here or use an NSubstitute Received
-            _fakereceiver.Received(1);
+            Assert.NotNull(_dataEventArgs);
         }
     }
 }
