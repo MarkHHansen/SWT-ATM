@@ -45,14 +45,12 @@ namespace ATM.Converter
 
         public void convertdata(List<string> transponderData)
         {
-            List<Airplane> airplanes = new List<Airplane>();
+            //List<Airplane> airplanes = new List<Airplane>();
 
             foreach (var data in this.transponderData)
             {
                 string[] dataStrings = data.Split(';');
 
-                
-                
                 Airplane airplane = new Airplane();
 
                 airplane._tag = dataStrings[0];
@@ -78,15 +76,20 @@ namespace ATM.Converter
                             plane._yCoordiante, airplane._yCoordiante, plane._Time, airplane._Time);
                         airplane._compasCourse = _compassCourse.CalculateCompassCourse(plane._xCoordiante,
                             plane._yCoordiante, airplane._xCoordiante, airplane._yCoordiante);
+
+                        plane._xCoordiante = airplane._xCoordiante;
+                        plane._yCoordiante = airplane._yCoordiante;
+                        plane._Time = airplane._Time;
+                        plane._Altitude = airplane._Altitude;
                     }
                 }
 
-                airplanes.Add(airplane);
+                //airplanes.Add(airplane);
             }
 
-            OnConvertedDataEvent(new ConvertEventArgs(airplanes));
-            oldAirplanes = airplanes;
-
+            OnConvertedDataEvent(new ConvertEventArgs(oldAirplanes));
+            //OnConvertedDataEvent(new ConvertEventArgs(airplanes));
+            //oldAirplanes = airplanes;
         }
 
         protected virtual void OnConvertedDataEvent(ConvertEventArgs e)

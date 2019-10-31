@@ -63,14 +63,14 @@ namespace ATM.Separation
                         {
                             _logfile.LogCollision(new List<string>()
                             {
-                                "Timestamp: " + newCondition.Time + "Between plane: " + newCondition.Pair.Item1._tag +
+                                "Timestamp: " + newCondition.Time + "  Between plane: " + newCondition.Pair.Item1._tag +
                                 "and" + newCondition.Pair.Item2._tag
                             });
 
                             Conditions.Add(newCondition);
                         }
 
-                        _consolelogger.PrintCollision();
+                        //_consolelogger.PrintCollision();
                         Conditions.Remove(newCondition);
                     }
 
