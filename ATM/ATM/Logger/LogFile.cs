@@ -26,7 +26,8 @@ namespace ATM.Logger
             for (int i = 0; i < messages.Count; i++)
             {
                 file.WriteLine(messages[i]);
-                Collision = messages[i]; 
+                Console.WriteLine(messages[i]);
+                //Collision = messages[i]; 
             }
 
             file.Close();
