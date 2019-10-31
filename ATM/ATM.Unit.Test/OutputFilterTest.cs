@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Globalization;
 using ATM.Converter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
@@ -7,32 +10,46 @@ using NUnit.Framework;
 using TransponderReceiver;
 using ATM.OutputValidation_;
 using ATM.ValidateAirplane;
-using ATM.Converter;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace ATM.Unit.Test
 {
-    
+    [TestFixture]
     class OutputFilterTest
     {
-        private AirplaneValidation _uut;
-        private ValidationEventArgs _recivedplaneargs;
-        //private IAirplaneValidation _Iplane;
+        private OutputFilter _uut;
+        private IAirplaneValidation _planeSource;
 
-        //[SetUp]
-        //public void Setup()
-        //{
-        //    _recivedplaneargs = null;
+        [SetUp]
+        public void Setup()
+        {
 
-        //    _uut = new AirplaneValidation(_recivedplaneargs);
-        //   // _uut.CurrentAirplanes
-
-        //   _uut.ValidationEvent +=
-                
+            _planeSource = Substitute.For<IAirplaneValidation>();
+            _uut = new OutputFilter(_planeSource);
 
 
         }
-       
 
+        [Test]
+        public void TestEvent()
+        {
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            airplane._yCoordiante = 23456;
+            airplane._xCoordiante = 30000;
+            airplane._Altitude = 2000;
+            airplane._compasCourse = 60.0;
+            airplane._velocity = 1000.0;
+            airplane._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
 
-    
+            _planeSource.ValidationEvent += Raise.EventWith(new ValidationEventArgs(temp));
+            _planeSource.Received(1);
+
+          
+        }
+
+        
+    }
+  
 }
