@@ -26,12 +26,12 @@ namespace ATM.ValidateAirplane
         public int[] getAirspaceLimits()
         {
             int[] temp = new int[6];
-            temp[0] = _xhigh;
-            temp[1] = _xlow;
+            temp[0] = _zHigh;
+            temp[1] = _zLow;
             temp[2] = _yhigh;
             temp[3] = _ylow;
-            temp[4] = _zHigh;
-            temp[5] = _zLow;
+            temp[4] = _xhigh;
+            temp[5] = _xlow;
             return temp;
         }
     }

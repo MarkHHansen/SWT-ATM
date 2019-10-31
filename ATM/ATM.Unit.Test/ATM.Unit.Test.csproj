@@ -73,6 +73,7 @@
     <Compile Include="AirplaneValidationUnitTest.cs" />
     <Compile Include="AirspaceUnitTest.cs" />
     <Compile Include="CheckSeparationConditionUnitTest.cs" />
+    <Compile Include="CompassCourseUnitTest.cs" />
     <Compile Include="ConvertFilterUnitTest.cs" />
     <Compile Include="OutputFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -32,11 +32,11 @@ namespace ATM.ValidateAirplane
             foreach (var data in e.ConvertedData)
             {
 
-                if (stats[0] > data._xCoordiante && stats[1] < data._xCoordiante)
+                if (stats[0] > data._Altitude && stats[1] < data._Altitude)
                 {
                     if (stats[2] > data._yCoordiante && stats[3] < data._yCoordiante)
                     {
-                        if (stats[4] > data._Altitude && stats[5] < data._Altitude)
+                        if (stats[4] > data._xCoordiante && stats[5] < data._xCoordiante)
                         {
                             Validated.Add(data);
                         }
