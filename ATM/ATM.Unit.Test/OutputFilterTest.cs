@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSubstitute;
+using NUnit.Framework;
+using TransponderReceiver;
 using ATM.OutputValidation_;
 
 namespace ATM.Unit.Test
 {
+    
     class OutputFilterTest
     {
         private OutputFilter _uut;
-
+        
     }
 }
