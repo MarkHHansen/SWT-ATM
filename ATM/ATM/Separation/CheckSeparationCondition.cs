@@ -13,7 +13,7 @@ namespace ATM.Separation
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
         LogFile _logfile = new LogFile();
-        private ConsoleLogger _consolelogger = new ConsoleLogger(); 
+        private ConsoleLogger _consolelogger = new ConsoleLogger();
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
@@ -36,10 +36,10 @@ namespace ATM.Separation
         {
             if (_currentAirplane.Count > 1)
             {
-                for (int i = 1; i < _currentAirplane.Count; i++)
+                for (int i = 1; i < 2; i++)
                 {
                     Airplane plane1 = _currentAirplane[i];
-                    Airplane plane2 = _currentAirplane[i-1];
+                    Airplane plane2 = _currentAirplane[i - 1];
 
                     var time = DateTime.Compare(plane1._Time, plane2._Time) < 0 ? plane1._Time : plane2._Time;
 
@@ -101,7 +101,7 @@ namespace ATM.Separation
             double yPow = (Math.Pow(Math.Abs(airplane1._yCoordiante - airplane2._yCoordiante), 2));
             double xPow = (Math.Pow(Math.Abs(airplane1._xCoordiante - airplane2._xCoordiante), 2));
             double distance = Math.Sqrt(xPow + yPow);
-            return distance; 
+            return distance;
         }
 
         private double CheckDistance(Airplane airplane1, Airplane airplane2)
@@ -112,7 +112,7 @@ namespace ATM.Separation
                 difference = difference * (-1);
             }
 
-            return difference; 
+            return difference;
         }
         public bool CheckForCollision(Airplane airplane1, Airplane airplane2)
         {
