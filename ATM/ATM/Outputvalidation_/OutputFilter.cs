@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AirTrafficMonitor.AirplaneValidation;
-using AirTrafficMonitor.Converter;
-using AirTrafficMonitor.Logger;
+using ATM.AirplaneValidation;
+using ATM.Converter;
+using ATM.Logger;
 
 namespace ATM.OutputValidation
 {

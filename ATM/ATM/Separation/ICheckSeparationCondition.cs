@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor.Separation
+namespace ATM.Separation
 {
     public interface ICheckSeparationCondition
     {

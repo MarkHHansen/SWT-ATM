@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AirTrafficMonitor.Separation;
+using ATM.Separation;
 
-namespace AirTrafficMonitor.Logger
+namespace ATM.Logger
 {
     public class LogFile 
     {

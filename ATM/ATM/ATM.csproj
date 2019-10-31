@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="Outputvalidation_\IOutputFilter.cs" />
     <Compile Include="Outputvalidation_\LogSeperationEventArgs.cs" />
     <Compile Include="Outputvalidation_\OutputFilter.cs" />

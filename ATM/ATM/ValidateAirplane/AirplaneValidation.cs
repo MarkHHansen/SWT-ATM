@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using AirTrafficMonitor.Converter;
-using AirTrafficMonitor.Separation;
+using ATM.Converter;
+using ATM.Separation;
 using ATM.OutputValidation;
 
-namespace AirTrafficMonitor.AirplaneValidation
+namespace ATM.AirplaneValidation
 {
     class AirplaneValidation
     {
