@@ -6,55 +6,108 @@ using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitor.AirplaneValidation;
 using AirTrafficMonitor.Converter;
+using AirTrafficMonitor.Logger;
 
 namespace AirTrafficMonitor.Separation
 {
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
+        LogFile _logfile = new LogFile();
+        private ConsoleLogger print; 
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
         public List<Airplane> _currentAirplane { get; set; }
-        private List<SeparationCondition> _conditions;
+        public List<SeparationCondition> Conditions;
 
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
             plane.ValidationEvent += HandleAirplaneValidationEvent;
+            Conditions = new List<SeparationCondition>();
         }
 
         private void HandleAirplaneValidationEvent(object sender, ValidationEventArgs e)
         {
             _currentAirplane = e.PlanesToValidate;
+            DetectCollisions();
         }
 
-        public void Detect(List<Tracks> temp)
+        public void DetectCollisions()
         {
             for (int i = 0; i < _currentAirplane.Count; i++)
             {
-                for (int j = i + 1; j < _currentAirplane.Count; j++)
+                for (int j = i + 1; j <= _currentAirplane.Count; j++)
                 {
                     Airplane plane1 = _currentAirplane[i];
                     Airplane plane2 = _currentAirplane[j];
-                    var track1 = plane1._tracks.First();
-                    var track2 = plane2._tracks.First(); 
 
-                    var time = DateTime.Compare(track1._Time, track2._Time) < 0 ? track1._Time : track2._Time;
+                    var time = DateTime.Compare(plane1._Time, plane2._Time) < 0 ? plane1._Time : plane2._Time;
+
+                    Tuple<Airplane, Airplane> newPair = new Tuple<Airplane, Airplane>(plane1, plane2);
+                    SeparationCondition newCondition = new SeparationCondition(time, newPair);
+
+                    // Hvis de er på koalitonskurs tilføj eller ikke tilføj 
+                    if (CheckForCollision(plane1, plane2) == true)
+                    {
+                        bool newCollision = false;
+                        for (int k = 0; k < Conditions.Count; k++)
+                        {
+                            if (newCondition.Equals(Conditions[k]))
+                            {
+                                newCollision = true;
+                            }
+                        }
+                        //Lav log hvis registreringen sker første gang
+                        if (newCollision == false)
+                        {
+                            _logfile.LogCollision(new List<string>()
+                            {
+                                "Timestamp: " + newCondition.Time + "Between plane: " + newCondition.Pair.Item1._tag + "and" + newCondition.Pair.Item2._tag 
+                            });
+
+                            Conditions.Add(newCondition);
+                        }
+                        print.PrintCollision();
+                    }
+                    // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
+                    else
+                    {
+                        for (int k = 0; k < Conditions.Count; k++)
+                        {
+                            if (newCondition.Equals(Conditions[k]))
+                            {
+                                Conditions.Remove(Conditions[k]);
+                            }
+                        }
+                    }
                 }
-
             }
         }
 
-        public bool CheckForCollission(Tracks airplane1, Tracks airplane2)
+        private double CheckAltitude(Airplane airplane1, Airplane airplane2)
         {
             double yPow = (Math.Pow(Math.Abs(airplane1._yCoordiante - airplane2._yCoordiante), 2));
             double xPow = (Math.Pow(Math.Abs(airplane1._xCoordiante - airplane2._xCoordiante), 2));
             double distance = Math.Sqrt(xPow + yPow);
+            return distance; 
+        }
 
-            double altitude = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
+        private double CheckDistance(Airplane airplane1, Airplane airplane2)
+        {
+            double difference = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
+            if (difference < 0)
+            {
+                difference = difference * (-1);
+            }
 
-            if (altitude < _minVertical && distance < _minHorizontal) 
+            return difference; 
+        }
+        public bool CheckForCollision(Airplane airplane1, Airplane airplane2)
+        {
+            if (CheckAltitude(airplane1, airplane2) < _minVertical && CheckDistance(airplane1, airplane2) < _minHorizontal)
+            {
                 return true;
-            
+            }
             return false;
         }
     }

@@ -8,13 +8,19 @@ namespace AirTrafficMonitor.Logger
 {
     public class ConsoleLogger : ILogger
     {
-        public void Print(List<string> airplanes)
+        private LogFile sep; 
+        public void PrintAirplanes(List<string> airplanes)
         {
             foreach (var plane in airplanes)
             {
                 Console.WriteLine(plane);
 
             }
+        }
+
+        public void PrintCollision()
+        {
+            Console.WriteLine(sep.Collision);
         }
     }
 }
