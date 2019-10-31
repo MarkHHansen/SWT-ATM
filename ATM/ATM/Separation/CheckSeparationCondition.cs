@@ -13,7 +13,7 @@ namespace AirTrafficMonitor.Separation
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
         LogFile _logfile = new LogFile();
-        private ConsoleLogger print; 
+        private ConsoleLogger _consolelogger; 
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
@@ -50,7 +50,7 @@ namespace AirTrafficMonitor.Separation
                     if (CheckForCollision(plane1, plane2) == true)
                     {
                         bool newCollision = false;
-                        for (int k = 0; k < Conditions.Count; k++)
+                        for (int k = 0; k <= Conditions.Count; k++)
                         {
                             if (newCondition.Equals(Conditions[k]))
                             {
@@ -67,19 +67,26 @@ namespace AirTrafficMonitor.Separation
 
                             Conditions.Add(newCondition);
                         }
-                        print.PrintCollision();
+                        _consolelogger.PrintCollision();
                     }
                     // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
-                    else
+                    for (int k = 0; k <= Conditions.Count; k++)
                     {
-                        for (int k = 0; k < Conditions.Count; k++)
+                        if (!newCondition.Equals(Conditions[k]))
                         {
-                            if (newCondition.Equals(Conditions[k]))
-                            {
-                                Conditions.Remove(Conditions[k]);
-                            }
+                            Conditions.Remove(Conditions[k]);
                         }
                     }
+                    //else
+                    //{
+                    //    for (int k = 0; k < Conditions.Count; k++)
+                    //    {
+                    //        if (newCondition.Equals(Conditions[k]))
+                    //        {
+                    //            Conditions.Remove(Conditions[k]);
+                    //        }
+                    //    }
+                    //}
                 }
             }
         }
