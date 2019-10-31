@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AirTrafficMonitor.Converter;
 
 
 namespace ATM.OutputValidation_
 {
     public class LogSeperationEventArgs : EventArgs
     {
-        public LogSeperationEventArgs(List<Airplane> ap)
-        {
+        //public LogSeperationEventArgs(List<Airplane> ap)
+        //{
 
 
-        }
+        //}
 
 
-        public List<Airplane> planesToLog
-        {
-            get;
-            set;
-        }
+        //public List<Airplane> planesToLog
+        //{
+        //    get;
+        //    set;
+        //}
 
     }
 }
