@@ -18,7 +18,7 @@ namespace ATM.Converter
         private ICompassCourse _compassCourse;
         private IVelocity _volocity;
 
-        ConvertFilter(ITransponderReceiver receiver, ICompassCourse compassCourse, IVelocity velocity)
+        public ConvertFilter(ITransponderReceiver receiver, ICompassCourse compassCourse, IVelocity velocity)
         {
             this._receiver = receiver;
             this._compassCourse = compassCourse;

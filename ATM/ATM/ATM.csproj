@@ -55,7 +55,7 @@
     <Compile Include="Converter\Airplane.cs" />
     <Compile Include="Converter\CompasCourse.cs" />
     <Compile Include="Converter\ConvertFilter.cs" />
-    <Compile Include="Converter\DataConvertEventArgs.cs" />
+    <Compile Include="Converter\ConvertEventArgs.cs" />
     <Compile Include="Converter\ICompassCourse.cs" />
     <Compile Include="Converter\IVelocity.cs" />
     <Compile Include="Converter\Velocity.cs" />

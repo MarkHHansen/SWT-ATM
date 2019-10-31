@@ -14,6 +14,7 @@ namespace ATM.OutputValidation_
         private ILogger _consoleLogger;
         private ILogger _ILogger;
         private List<Airplane> _oldplane;
+        private IAirplaneValidation _airplaneValidation;
 
 
         //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
@@ -44,7 +45,9 @@ namespace ATM.OutputValidation_
 
         public OutputFilter(IAirplaneValidation airplaneValidation)
         {
-            airplaneValidation.ValidationEvent += HandleValidationEvent;
+            this._airplaneValidation = airplaneValidation;
+
+            _airplaneValidation.ValidationEvent += HandleValidationEvent;
         }
 
         private void HandleValidationEvent(object sender, ValidationEventArgs e)
