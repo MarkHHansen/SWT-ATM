@@ -28,7 +28,6 @@ namespace ATM.Unit.Test
             _uut = new ConvertFilter(_receiver, _compassCourse, _velocity);
         }
 
-
         [TestMethod]
         public void TestEvent()
         {

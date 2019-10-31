@@ -16,9 +16,6 @@ namespace AirTrafficMonitor
         static void Main(string[] args)
         {
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-
-
-            
         }
 
     }
