@@ -42,7 +42,7 @@ namespace ATM.OutputValidation_
 
         }
 
-        public List<Airplane> CurrentAirplanes { get; set; }
+      //  public List<Airplane> CurrentAirplanes { get; set; }
 
         public OutputFilter(IAirplaneValidation airplaneValidation)
         {
@@ -53,7 +53,7 @@ namespace ATM.OutputValidation_
 
         private void HandleValidationEvent(object sender, ValidationEventArgs e)
         {
-            CurrentAirplanes = e.PlanesToValidate;
+            List<Airplane> CurrentAirplanes = e.PlanesToValidate;
             consolelogger.PrintAirplanes(CurrentAirplanes);
         }
     }

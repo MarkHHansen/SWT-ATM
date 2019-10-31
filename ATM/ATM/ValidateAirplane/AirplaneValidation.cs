@@ -27,6 +27,7 @@ namespace ATM.ValidateAirplane
         {
 
             List<Airplane> temp = e.ConvertedData;
+            List< Airplane> TempValidated = new List<Airplane>();
             int[] stats = _airspace.getAirspaceLimits();
 
             foreach (var data in temp)
@@ -38,14 +39,14 @@ namespace ATM.ValidateAirplane
                     {
                         if (stats[4] > data._xCoordiante && stats[5] < data._xCoordiante)
                         {
-                            Validated.Add(data);
+                            TempValidated.Add(data);
                         }
                     }
                 }
             }
 
 
-            OnCheckSeperationCondition(new ValidationEventArgs(Validated));
+            OnCheckSeperationCondition(new ValidationEventArgs(TempValidated));
 
         }
 
