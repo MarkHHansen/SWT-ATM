@@ -15,8 +15,7 @@ namespace ATM.Logger
         public string Collision { get; set; }
         public LogFile()
         {
-            MakeFolder();
-            MakeFile();
+           
         }
 
         public void LogCollision(List<string> messages)
