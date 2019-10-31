@@ -16,7 +16,9 @@ namespace ATM.Unit.Test
     {
         private AirplaneValidation _uut;
         private ConvertEventArgs _receivedEventArgs;
+        private ValidationEventArgs valarg;
         private IConvertFilter _tempRec = Substitute.For<IConvertFilter>();
+        private IAirplaneValidation rec = Substitute.For<IAirplaneValidation>();
 
         [SetUp]
         public void SetUp()
@@ -24,8 +26,10 @@ namespace ATM.Unit.Test
             _receivedEventArgs = null;
             _uut = new AirplaneValidation(_tempRec);
 
-            _uut.ConvertedDataEvent +=
+            _uut._receiver.ConvertedDataEvent +=
             (o,args) => { _receivedEventArgs = args; };
+
+            
         }
 
         [Test]
@@ -45,7 +49,29 @@ namespace ATM.Unit.Test
 
             _tempRec.ConvertedDataEvent += Raise.EventWith(this, new ConvertEventArgs(temp));
 
-            Assert.That(_receivedEventArgs.ConvertedData, Is.Not.Null);
+            Assert.NotNull(_receivedEventArgs);
+        }
+
+        [Test]
+        public void Validation_RaiseEvent()
+        {
+
+            _uut = new AirplaneValidation(_tempRec);
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            airplane._yCoordiante = 23456;
+            airplane._xCoordiante = 30000;
+            airplane._Altitude = 2000;
+            airplane._compasCourse = 60.0;
+            airplane._velocity = 1000.0;
+            airplane._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            temp.Add(airplane);
+
+            rec.ValidationEvent += Raise.EventWith(this, new ValidationEventArgs(temp));
+
+            Assert.NotNull(valarg);
         }
     }
 }
