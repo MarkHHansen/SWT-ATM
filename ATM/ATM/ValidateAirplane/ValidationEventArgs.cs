@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AirTrafficMonitor.Converter;
+using ATM.Converter;
 
-namespace AirTrafficMonitor.AirplaneValidation
+namespace ATM.AirplaneValidation
 {
     public class ValidationEventArgs : EventArgs
     {
