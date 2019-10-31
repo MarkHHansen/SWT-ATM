@@ -15,6 +15,7 @@ namespace ATM.OutputValidation_
         private ILogger _ILogger;
         private List<Airplane> _oldplane;
         private IAirplaneValidation _airplaneValidation;
+        ConsoleLogger consolelogger = new ConsoleLogger();
 
 
         //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
@@ -53,6 +54,7 @@ namespace ATM.OutputValidation_
         private void HandleValidationEvent(object sender, ValidationEventArgs e)
         {
             CurrentAirplanes = e.PlanesToValidate;
+            consolelogger.PrintAirplanes(CurrentAirplanes);
         }
     }
 }

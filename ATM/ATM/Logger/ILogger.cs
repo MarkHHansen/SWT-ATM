@@ -10,6 +10,6 @@ namespace ATM.Logger
     public interface ILogger
     {
         void PrintCollision();
-        void PrintAirplanes(List<string> airplanes);
+        void PrintAirplanes(List<Airplane> airplanes);
     }
 }

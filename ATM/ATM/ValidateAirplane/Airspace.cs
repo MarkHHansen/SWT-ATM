@@ -13,7 +13,7 @@ namespace ATM.ValidateAirplane
         private int _yhigh, _ylow;
         private int _zLow, _zHigh;
 
-        Airspace()
+        public Airspace()
         {
             _xhigh = 90000;
             _xlow = 10000;
@@ -23,9 +23,9 @@ namespace ATM.ValidateAirplane
             _zHigh = 20000;
         }
 
-        int[] IAirspace.getAirspaceLimits()
+        public int[] getAirspaceLimits()
         {
-            int[] temp = new int[5];
+            int[] temp = new int[6];
             temp[0] = _xhigh;
             temp[1] = _xlow;
             temp[2] = _yhigh;
