@@ -9,7 +9,7 @@ namespace ATM.ValidateAirplane
     public class AirplaneValidation : IAirplaneValidation
     {
         private IConvertFilter _receiver;
-        private List<Airplane> Validated;
+        private List<Airplane> Validated = new List<Airplane>();
         private Airspace _airspace = new Airspace();
 
         public event EventHandler<ValidationEventArgs> ValidationEvent;
@@ -25,18 +25,18 @@ namespace ATM.ValidateAirplane
 
         private void _receiver_ConvertedDataEvent(object sender, ConvertEventArgs e)
         {
-            
-            Validated = e.ConvertedData;
+
+            List<Airplane> temp = e.ConvertedData;
             int[] stats = _airspace.getAirspaceLimits();
 
-            foreach (var data in e.ConvertedData)
+            foreach (var data in temp)
             {
 
-                if (stats[0] > data._xCoordiante && stats[1] < data._xCoordiante)
+                if (stats[0] > data._Altitude && stats[1] < data._Altitude)
                 {
                     if (stats[2] > data._yCoordiante && stats[3] < data._yCoordiante)
                     {
-                        if (stats[4] > data._Altitude && stats[5] < data._Altitude)
+                        if (stats[4] > data._xCoordiante && stats[5] < data._xCoordiante)
                         {
                             Validated.Add(data);
                         }
@@ -44,9 +44,9 @@ namespace ATM.ValidateAirplane
                 }
             }
 
-            
-                OnCheckSeperationCondition(new ValidationEventArgs(Validated));
-            
+
+            OnCheckSeperationCondition(new ValidationEventArgs(Validated));
+
         }
 
         //private void Validate(object s, ValidationEventArgs e)
@@ -56,7 +56,7 @@ namespace ATM.ValidateAirplane
 
         //    foreach (Airplane data in e.PlanesToValidate)
         //    {
-                
+
 
         //        if (stats[0] > data._xCoordiante && stats[1] < data._xCoordiante)
         //        {
@@ -78,10 +78,10 @@ namespace ATM.ValidateAirplane
 
         protected virtual void OnCheckSeperationCondition(ValidationEventArgs event_)
         {
-            ValidationEvent?.Invoke(this,event_);
-            Console.WriteLine("tis");
+            ValidationEvent?.Invoke(this, event_);
+            //Console.WriteLine("tis");
         }
 
-        
+
     }
 }

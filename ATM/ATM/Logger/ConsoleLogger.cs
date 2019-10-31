@@ -9,7 +9,7 @@ namespace ATM.Logger
 {
     public class ConsoleLogger : ILogger
     {
-        private LogFile sep; 
+        private LogFile sep = new LogFile(); 
         public void PrintAirplanes(List<Airplane> airplanes)
         {
             foreach (var plane in airplanes)
