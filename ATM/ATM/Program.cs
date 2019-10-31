@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TransponderReceiver;
 using ATM.Separation;
 using ATM.Converter;
-using ATM.AirplaneValidation;
+using ATM.ValidateAirplane;
 using ATM.Logger;
 
 namespace ATM

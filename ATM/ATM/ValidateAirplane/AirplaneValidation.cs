@@ -4,7 +4,7 @@ using ATM.Converter;
 using ATM.Separation;
 using ATM.OutputValidation;
 
-namespace ATM.AirplaneValidation
+namespace ATM.ValidateAirplane
 {
     class AirplaneValidation
     {

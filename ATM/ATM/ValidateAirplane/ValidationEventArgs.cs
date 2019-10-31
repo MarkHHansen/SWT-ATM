@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Converter;
 
-namespace ATM.AirplaneValidation
+namespace ATM.ValidateAirplane
 {
     public class ValidationEventArgs : EventArgs
     {

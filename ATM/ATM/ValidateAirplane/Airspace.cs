@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ATM.AirplaneValidation
+namespace ATM.ValidateAirplane
 {
     public class Airspace : IAirspace
     {
