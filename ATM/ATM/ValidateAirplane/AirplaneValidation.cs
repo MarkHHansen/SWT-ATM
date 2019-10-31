@@ -29,7 +29,7 @@ namespace AirTrafficMonitor.AirplaneValidation
 
             foreach (Airplane data in e.PlanesToValidate)
             {
-                List<Tracks> temp = data._tracks;
+                List<Airplane> temp = data.;
 
                 if (stats[0] > temp[0]._xCoordiante && stats[1] < temp[0]._xCoordiante)
                 {

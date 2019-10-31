@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using AirTrafficMonitor.Converter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using NUnit.Framework;
-using ATM;
+using AirTrafficMonitor.Converter;
 using TransponderReceiver;
 
 namespace ATM.Unit.Test
