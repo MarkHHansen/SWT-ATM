@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ATM.Converter;
 
 
-namespace ATM.OutputValidation
+namespace ATM.OutputValidation_
 {
     public class LogSeperationEventArgs : EventArgs
     {
