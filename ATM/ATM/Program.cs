@@ -18,7 +18,7 @@ namespace ATM
 
         static void Main(string[] args)
         {
-            Client Client = new Client();
+            Client client = new Client();
 
             while (true)
             {

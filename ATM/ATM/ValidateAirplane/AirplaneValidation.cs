@@ -10,11 +10,11 @@ namespace ATM.ValidateAirplane
     {
         private IConvertFilter _receiver;
         private List<Airplane> Validated;
-        private IAirspace _airspace;
+        private Airspace _airspace = new Airspace();
 
         public event EventHandler<ValidationEventArgs> ValidationEvent;
-        public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
-        public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
+        //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
+        //public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
 
         public AirplaneValidation(IConvertFilter receiver)
         {
@@ -25,12 +25,12 @@ namespace ATM.ValidateAirplane
 
         private void _receiver_ConvertedDataEvent(object sender, ConvertEventArgs e)
         {
+            
             Validated = e.ConvertedData;
             int[] stats = _airspace.getAirspaceLimits();
 
-            foreach (Airplane data in e.ConvertedData)
+            foreach (var data in e.ConvertedData)
             {
-
 
                 if (stats[0] > data._xCoordiante && stats[1] < data._xCoordiante)
                 {
@@ -44,10 +44,9 @@ namespace ATM.ValidateAirplane
                 }
             }
 
-            if (Validated != e.ConvertedData)
-            {
-                OnCheckSeperationCondition(new PlaneConditionCheckedEventArgs(Validated), new LogSeperationEventArgs(Validated));
-            }
+            
+                OnCheckSeperationCondition(new ValidationEventArgs(Validated));
+            
         }
 
         //private void Validate(object s, ValidationEventArgs e)
@@ -77,10 +76,10 @@ namespace ATM.ValidateAirplane
         //    }
         //}
 
-        protected virtual void OnCheckSeperationCondition(PlaneConditionCheckedEventArgs epc, LogSeperationEventArgs els)
+        protected virtual void OnCheckSeperationCondition(ValidationEventArgs event_)
         {
-            PlaneConditionChecked?.Invoke(this, epc);
-            LogSeperationEvent?.Invoke(this, els);
+            ValidationEvent?.Invoke(this,event_);
+            Console.WriteLine("tis");
         }
 
         

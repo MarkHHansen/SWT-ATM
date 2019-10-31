@@ -13,7 +13,7 @@ namespace ATM.Separation
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
         LogFile _logfile = new LogFile();
-        private ConsoleLogger _consolelogger; 
+        private ConsoleLogger _consolelogger = new ConsoleLogger(); 
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
@@ -36,57 +36,61 @@ namespace ATM.Separation
         {
             for (int i = 0; i < _currentAirplane.Count; i++)
             {
-                for (int j = i + 1; j <= _currentAirplane.Count; j++)
+                if (_currentAirplane.Count > 1 )
                 {
-                    Airplane plane1 = _currentAirplane[i];
-                    Airplane plane2 = _currentAirplane[j];
-
-                    var time = DateTime.Compare(plane1._Time, plane2._Time) < 0 ? plane1._Time : plane2._Time;
-
-                    Tuple<Airplane, Airplane> newPair = new Tuple<Airplane, Airplane>(plane1, plane2);
-                    SeparationCondition newCondition = new SeparationCondition(time, newPair);
-
-                    // Hvis de er på koalitonskurs tilføj eller ikke tilføj 
-                    if (CheckForCollision(plane1, plane2) == true)
+                    for (int j = i + 1; j <= _currentAirplane.Count; j++)
                     {
-                        bool newCollision = false;
-                        for (int k = 0; k <= Conditions.Count; k++)
+                        Airplane plane1 = _currentAirplane[i];
+                        Airplane plane2 = _currentAirplane[j];
+
+                        var time = DateTime.Compare(plane1._Time, plane2._Time) < 0 ? plane1._Time : plane2._Time;
+
+                        Tuple<Airplane, Airplane> newPair = new Tuple<Airplane, Airplane>(plane1, plane2);
+                        SeparationCondition newCondition = new SeparationCondition(time, newPair);
+
+                        // Hvis de er på koalitonskurs tilføj eller ikke tilføj 
+                        if (CheckForCollision(plane1, plane2) == true)
                         {
-                            if (newCondition.Equals(Conditions[k]))
+                            bool newCollision = false;
+                            for (int k = 0; k <= Conditions.Count; k++)
                             {
-                                newCollision = true;
+                                if (newCondition.Equals(Conditions[k]))
+                                {
+                                    newCollision = true;
+                                }
                             }
-                        }
-                        //Lav log hvis registreringen sker første gang
-                        if (newCollision == false)
-                        {
-                            _logfile.LogCollision(new List<string>()
+                            //Lav log hvis registreringen sker første gang
+                            if (newCollision == false)
                             {
-                                "Timestamp: " + newCondition.Time + "Between plane: " + newCondition.Pair.Item1._tag + "and" + newCondition.Pair.Item2._tag 
+                                _logfile.LogCollision(new List<string>()
+                            {
+                                "Timestamp: " + newCondition.Time + "Between plane: " + newCondition.Pair.Item1._tag + "and" + newCondition.Pair.Item2._tag
                             });
 
-                            Conditions.Add(newCondition);
+                                Conditions.Add(newCondition);
+                            }
+                            _consolelogger.PrintCollision();
                         }
-                        _consolelogger.PrintCollision();
-                    }
-                    // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
-                    for (int k = 0; k <= Conditions.Count; k++)
-                    {
-                        if (!newCondition.Equals(Conditions[k]))
+                        // Hvis ingen collission sker tjek om de er forsvundet og derefter fjern dem 
+                        for (int k = 0; k <= Conditions.Count; k++)
                         {
-                            Conditions.Remove(Conditions[k]);
+                            if (!newCondition.Equals(Conditions[k]))
+                            {
+                                Conditions.Remove(Conditions[k]);
+                            }
                         }
+                        //else
+                        //{
+                        //    for (int k = 0; k < Conditions.Count; k++)
+                        //    {
+                        //        if (newCondition.Equals(Conditions[k]))
+                        //        {
+                        //            Conditions.Remove(Conditions[k]);
+                        //        }
+                        //    }
+                        //}
                     }
-                    //else
-                    //{
-                    //    for (int k = 0; k < Conditions.Count; k++)
-                    //    {
-                    //        if (newCondition.Equals(Conditions[k]))
-                    //        {
-                    //            Conditions.Remove(Conditions[k]);
-                    //        }
-                    //    }
-                    //}
+
                 }
             }
         }
