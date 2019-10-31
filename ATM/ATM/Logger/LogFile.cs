@@ -15,8 +15,6 @@ namespace ATM.Logger
         public string Collision { get; set; }
         public LogFile()
         {
-            MakeFolder();
-            MakeFile();
         }
 
         public void LogCollision(List<string> messages)
@@ -26,7 +24,8 @@ namespace ATM.Logger
             for (int i = 0; i < messages.Count; i++)
             {
                 file.WriteLine(messages[i]);
-                Collision = messages[i]; 
+                Console.WriteLine(messages[i]);
+                //Collision = messages[i]; 
             }
 
             file.Close();

@@ -9,10 +9,9 @@ namespace ATM.ValidateAirplane
     public class AirplaneValidation : IAirplaneValidation
     {
         private IConvertFilter _receiver;
-        private List<Airplane> Validated { get; set; }
+        private List<Airplane> Validated = new List<Airplane>();
         private Airspace _airspace = new Airspace();
 
-        public event EventHandler<ConvertEventArgs> ConvertedDataEvent;
         public event EventHandler<ValidationEventArgs> ValidationEvent;
         //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
         //public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
@@ -26,11 +25,12 @@ namespace ATM.ValidateAirplane
 
         private void _receiver_ConvertedDataEvent(object sender, ConvertEventArgs e)
         {
-            
-            Validated = e.ConvertedData;
+
+            List<Airplane> temp = e.ConvertedData;
+            List< Airplane> TempValidated = new List<Airplane>();
             int[] stats = _airspace.getAirspaceLimits();
 
-            foreach (var data in e.ConvertedData)
+            foreach (var data in temp)
             {
 
                 if (stats[0] > data._Altitude && stats[1] < data._Altitude)
@@ -39,12 +39,15 @@ namespace ATM.ValidateAirplane
                     {
                         if (stats[4] > data._xCoordiante && stats[5] < data._xCoordiante)
                         {
-                            Validated.Add(data);
+                            TempValidated.Add(data);
                         }
                     }
                 }
             }
-            OnCheckSeperationCondition(new ValidationEventArgs(Validated));
+
+
+            OnCheckSeperationCondition(new ValidationEventArgs(TempValidated));
+
         }
 
         //private void Validate(object s, ValidationEventArgs e)
@@ -54,7 +57,7 @@ namespace ATM.ValidateAirplane
 
         //    foreach (Airplane data in e.PlanesToValidate)
         //    {
-                
+
 
         //        if (stats[0] > data._xCoordiante && stats[1] < data._xCoordiante)
         //        {
@@ -76,10 +79,10 @@ namespace ATM.ValidateAirplane
 
         protected virtual void OnCheckSeperationCondition(ValidationEventArgs event_)
         {
-            ValidationEvent?.Invoke(this,event_);
-            Console.WriteLine("tis");
+            ValidationEvent?.Invoke(this, event_);
+            //Console.WriteLine("tis");
         }
 
-        
+
     }
 }
