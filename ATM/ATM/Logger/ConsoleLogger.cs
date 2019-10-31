@@ -20,7 +20,7 @@ namespace AirTrafficMonitor.Logger
 
         public void PrintCollision()
         {
-            Console.WriteLine(sep.Collision);
+            Console.WriteLine(@"Collision: " + sep.Collision);
         }
     }
 }

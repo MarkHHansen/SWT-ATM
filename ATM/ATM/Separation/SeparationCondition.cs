@@ -18,5 +18,16 @@ namespace AirTrafficMonitor.Separation
             Time = time;
             Pair = pair;
         }
+
+        public bool Equals(SeparationCondition other)
+        {
+            if (string.Equals(this.Pair.Item1._tag, other.Pair.Item1._tag) &&
+                string.Equals(this.Pair.Item2._tag, other.Pair.Item2._tag))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
