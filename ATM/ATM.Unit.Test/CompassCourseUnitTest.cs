@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using NSubstitute;
 using NUnit.Framework;
-using TransponderReceiver;
 using ATM.Converter;
 
 
