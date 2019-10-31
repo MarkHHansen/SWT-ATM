@@ -20,7 +20,7 @@ namespace AirTrafficMonitor.Logger
 
         public void LogSeparation()
         {
-
+            
         }
 
         public void MakeFolder()
