@@ -52,6 +52,7 @@ namespace ATM.Separation
                             });
 
                             Conditions.Add(newCondition);
+                            _consolelogger.PrintCollision();
                         }
                     }
 
@@ -61,6 +62,11 @@ namespace ATM.Separation
                     }
                 }
             }
+        }
+
+        public List<SeparationCondition> GetCondition()
+        {
+            return Conditions;
         }
 
         private double CheckAltitude(Airplane airplane1, Airplane airplane2)

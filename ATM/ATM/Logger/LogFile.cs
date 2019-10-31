@@ -12,7 +12,7 @@ namespace ATM.Logger
     public class LogFile 
     {
         private System.IO.StreamWriter file;
-        public string Collision { get; set; }
+        public List<string> Collision { get; set; }
         public LogFile()
         {
         }
