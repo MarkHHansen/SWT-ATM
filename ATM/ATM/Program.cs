@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using TransponderReceiver;
 using ATM.Separation;
@@ -18,12 +17,10 @@ namespace ATM
 
         static void Main(string[] args)
         {
-            Client Client = new Client();
+            var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
-            while (true)
-            {
-                Thread.Sleep(100);
-            }
+
+            
         }
 
     }
