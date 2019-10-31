@@ -63,11 +63,6 @@ namespace ATM.Converter
 
                 airplane._Time = DateTime.ParseExact(dataStrings[4], "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
 
-
-
-                    
-                    //DateTime.ParseExact(dataStrings[4], "yyyy / MM / dd HH: mm:ss.fff", null);
-
                 foreach (Airplane plane in oldAirplanes)
                 {
                     if (airplane._tag == plane._tag)
@@ -77,10 +72,10 @@ namespace ATM.Converter
                         airplane._compasCourse = _compassCourse.CalculateCompassCourse(plane._xCoordiante,
                             plane._yCoordiante, airplane._xCoordiante, airplane._yCoordiante);
 
-                        plane._xCoordiante = airplane._xCoordiante;
-                        plane._yCoordiante = airplane._yCoordiante;
-                        plane._Time = airplane._Time;
-                        plane._Altitude = airplane._Altitude;
+                        //plane._xCoordiante = airplane._xCoordiante;
+                        //plane._yCoordiante = airplane._yCoordiante;
+                        //plane._Time = airplane._Time;
+                        //plane._Altitude = airplane._Altitude;
                     }
                 }
 
