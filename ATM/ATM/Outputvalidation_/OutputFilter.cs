@@ -9,11 +9,13 @@ using ATM.Logger;
 
 namespace ATM.OutputValidation_
 {
-    class OutputFilter
+    public class OutputFilter
     {
         private ILogger _consoleLogger;
         private ILogger _ILogger;
         private List<Airplane> _oldplane;
+        private IAirplaneValidation _airplaneValidation;
+        ConsoleLogger consolelogger = new ConsoleLogger();
 
 
         //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
@@ -44,12 +46,15 @@ namespace ATM.OutputValidation_
 
         public OutputFilter(IAirplaneValidation airplaneValidation)
         {
-            airplaneValidation.ValidationEvent += HandleValidationEvent;
+            this._airplaneValidation = airplaneValidation;
+
+            _airplaneValidation.ValidationEvent += HandleValidationEvent;
         }
 
         private void HandleValidationEvent(object sender, ValidationEventArgs e)
         {
             CurrentAirplanes = e.PlanesToValidate;
+            consolelogger.PrintAirplanes(CurrentAirplanes);
         }
     }
 }

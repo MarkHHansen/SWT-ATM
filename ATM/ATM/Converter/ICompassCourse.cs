@@ -9,6 +9,5 @@ namespace ATM.Converter
     public interface ICompassCourse
     {
         double CalculateCompassCourse(double x1, double y1, double x2, double y2);
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace ATM.Converter
         private ICompassCourse _compassCourse;
         private IVelocity _volocity;
 
-        ConvertFilter(ITransponderReceiver receiver, ICompassCourse compassCourse, IVelocity velocity)
+        public ConvertFilter(ITransponderReceiver receiver, ICompassCourse compassCourse, IVelocity velocity)
         {
             this._receiver = receiver;
             this._compassCourse = compassCourse;
@@ -31,6 +32,8 @@ namespace ATM.Converter
         private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             transponderData = e.TransponderData;
+            
+            
             convertdata(transponderData);
         }
 
@@ -47,6 +50,8 @@ namespace ATM.Converter
             foreach (var data in this.transponderData)
             {
                 string[] dataStrings = data.Split(';');
+
+                
                 
                 Airplane airplane = new Airplane();
 
@@ -58,7 +63,12 @@ namespace ATM.Converter
 
                 airplane._Altitude = Convert.ToDouble(dataStrings[3]);
 
-                airplane._Time = DateTime.ParseExact(dataStrings[4], "yyyy-mm-dd-hh-mm-ss-ff", null);
+                airplane._Time = DateTime.ParseExact(dataStrings[4], "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
+
+
+
+                    
+                    //DateTime.ParseExact(dataStrings[4], "yyyy / MM / dd HH: mm:ss.fff", null);
 
                 foreach (Airplane plane in oldAirplanes)
                 {
