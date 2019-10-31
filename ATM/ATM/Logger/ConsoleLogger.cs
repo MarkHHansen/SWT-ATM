@@ -15,7 +15,8 @@ namespace ATM.Logger
             foreach (var plane in airplanes)
             {
                 Console.WriteLine($"Tag: {plane._tag}\t X-Position: {plane._xCoordiante}\t Y-Position: {plane._yCoordiante}\t Altitude: {plane._Altitude} m\t Timestamp: {plane._Time}\n" +
-                                  $"Horizontal Velocity: {plane._velocity} m/s\t Current compass course: {plane._compasCourse} degrees");
+                                  $"Horizontal Velocity: {plane._velocity} m/s\t Current compass course: {plane._compasCourse} degrees\n");
+                Console.WriteLine("\n");
 
             }
         }
