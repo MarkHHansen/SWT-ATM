@@ -17,7 +17,6 @@ namespace ATM.Logger
 
             }
         }
-
         public void PrintCollision()
         {
             Console.WriteLine(@"Collision: " + sep.Collision);

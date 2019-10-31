@@ -13,7 +13,7 @@ namespace ATM.Separation
     public class CheckSeparationCondition : ICheckSeparationCondition
     {
         LogFile _logfile = new LogFile();
-        private ConsoleLogger _consolelogger; 
+        private ConsoleLogger _consolelogger = new ConsoleLogger(); 
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
         public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
