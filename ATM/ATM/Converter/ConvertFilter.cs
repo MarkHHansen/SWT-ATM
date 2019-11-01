@@ -13,9 +13,9 @@ namespace ATM.Converter
 
         //event Handler for transponder receiver
 
-        private List<string> transponderData = new List<string>();
+        public List<string> transponderData { get; set; }
 
-        public ITransponderReceiver _receiver;
+        private ITransponderReceiver _receiver;
         private ICompassCourse _compassCourse;
         private IVelocity _volocity;
 
@@ -36,14 +36,20 @@ namespace ATM.Converter
 
         //event Source
 
-        private List<Airplane> oldAirplanes = new List<Airplane>();
+        public List<Airplane> oldAirplanes = new List<Airplane>();
         public event EventHandler<ConvertEventArgs> ConvertedDataEvent;
+
+        protected virtual void OnConvertedDataEvent(ConvertEventArgs e)
+        {
+            ConvertedDataEvent?.Invoke(this, e);
+        }
+        // Method
 
         public void convertdata(List<string> transponderData)
         {
             List<Airplane> airplanes = new List<Airplane>();
 
-            foreach (var data in this.transponderData) //Hvorfor bliver der kaldt this.trandponderData i stedet for den som givet med som parameter?
+            foreach (var data in transponderData)
             {
                 string[] dataStrings = data.Split(';');
 
@@ -67,11 +73,6 @@ namespace ATM.Converter
                             plane._yCoordiante, airplane._yCoordiante, plane._Time, airplane._Time);
                         airplane._compasCourse = _compassCourse.CalculateCompassCourse(plane._xCoordiante,
                             plane._yCoordiante, airplane._xCoordiante, airplane._yCoordiante);
-
-                        //plane._xCoordiante = airplane._xCoordiante;
-                        //plane._yCoordiante = airplane._yCoordiante;
-                        //plane._Time = airplane._Time;
-                        //plane._Altitude = airplane._Altitude;
                     }
                 }
 
@@ -81,16 +82,6 @@ namespace ATM.Converter
             //OnConvertedDataEvent(new ConvertEventArgs(oldAirplanes));
             OnConvertedDataEvent(new ConvertEventArgs(airplanes));
             oldAirplanes = airplanes;
-        }
-
-        protected virtual void OnConvertedDataEvent(ConvertEventArgs e)
-        {
-            ConvertedDataEvent?.Invoke(this, e);
-        }
-
-        public List<Airplane> GetOldAirplanes()
-        {
-            return oldAirplanes;
         }
     }
 }
