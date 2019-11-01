@@ -9,6 +9,7 @@ using ATM.Logger;
 using ATM.Separation;
 using ATM.ValidateAirplane;
 using ATM.OutputValidation_;
+using ATM;
 
 namespace ATM.Unit.Test
 {
@@ -20,11 +21,14 @@ namespace ATM.Unit.Test
         private ICheckSeparationCondition _checkSeparationCondition;
         private OutputFilter _outputFilter;
         private Client _uut;
+        private Program main;
+        
 
         [SetUp]
         public void Setup()
         {
             _uut = new Client();
+            main = new Program();
         }
 
         [Test]
@@ -32,6 +36,18 @@ namespace ATM.Unit.Test
         {
             // Assert
             Assert.NotNull(_uut);
+        }
+
+        [Test]
+        public void MainClassTest()
+        {
+            Assert.NotNull(main);
+        }
+
+        [Test]
+        public void MainExTest()
+        {
+            
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
@@ -22,8 +23,8 @@ namespace ATM.Unit.Test
         public void Setup()
         {
             _fakereceiver = Substitute.For<ITransponderReceiver>();
-            _fakecompassCourse = Substitute.For<ICompassCourse>();
             _fakevelocity = Substitute.For<IVelocity>();
+            _fakecompassCourse = Substitute.For<ICompassCourse>();
 
             _uut = new ConvertFilter(_fakereceiver, _fakecompassCourse, _fakevelocity);
         }
@@ -88,17 +89,42 @@ namespace ATM.Unit.Test
         public void Test_Convert_Data_Funktion_Velocity()
         {
             // Arrange
+            Airplane airplane = new Airplane();
+            airplane._tag = "XYZ987";
+            airplane._xCoordiante = 2559;
+            airplane._yCoordiante = 7565;
+            airplane._Altitude = 4000;
+            airplane._Time = DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
+            _uut.oldAirplanes.Add(airplane);
 
             // Act
-
+            List<string> testData = new List<string>();
+            testData.Add("XYZ987;2600;7600;4000;20151006213459789");
+            _uut.convertdata(testData);
+            
             // Assert
-            Assert.That(_uut.oldAirplanes.Last()._velocity, Is.EqualTo(1.7950549357115013438));
+            _fakevelocity.Received(1);
         }
 
         [Test]
         public void Test_Convert_Data_Funktion_CompassCourse()
         {
+            // Arrange
+            Airplane airplane = new Airplane();
+            airplane._tag = "XYZ987";
+            airplane._xCoordiante = 2559;
+            airplane._yCoordiante = 7565;
+            airplane._Altitude = 4000;
+            airplane._Time = DateTime.ParseExact("20151006213456789", "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
+            _uut.oldAirplanes.Add(airplane);
 
+            // Act
+            List<string> testData = new List<string>();
+            testData.Add("XYZ987;2600;7600;4000;20151006213459789");
+            _uut.convertdata(testData);
+
+            // Assert
+            _fakecompassCourse.Received(1);
         }
     }
 }
