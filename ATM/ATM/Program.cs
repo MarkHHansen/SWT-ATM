@@ -17,10 +17,12 @@ namespace ATM
         static void Main(string[] args)
         {
             Client client = new Client();
+            ConsoleLogger logger = new ConsoleLogger();
 
             while (true)
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(201);
+                
                 
             }
         }
