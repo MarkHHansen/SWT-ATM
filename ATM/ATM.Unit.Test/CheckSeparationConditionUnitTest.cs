@@ -139,26 +139,8 @@ namespace ATM.Unit.Test
             Assert.That(_uut.GetCondition().Count, Is.EqualTo(result));
         }
 
-        [TestCase(25, 40, 200, 2000, 4000, 5000, 0, TestName = "Planes are not colliding")]
-        [TestCase(5000, 40, 200, 2000, 4000, 5000, 0, TestName = "Planes are not colliding")]
-        public void Test_planes_not_colliding(int airplane1X, int airplane1Y, int airplane1Altitude,
-            int airplane2X, int airplane2Y, int airplane2Altitude, double result)
-        {
-            TestPlane1._xCoordiante = airplane1X;
-            TestPlane1._yCoordiante = airplane1Y;
-            TestPlane1._Altitude = airplane1Altitude;
-
-            TestPlane2._xCoordiante = airplane2X;
-            TestPlane2._yCoordiante = airplane2Y;
-            TestPlane2._Altitude = airplane2Altitude;
-
-            _uut.DetectCollisions(TestSeparationInAirspace);
-
-            Assert.That(_uut.GetCondition(), Is.Not.Null);
-        }
-
         [TestCase(400, 500, 10000, 10001, 10000, 10001)]
-        public void CheckCondition_makes_conditions_list(int airplane1X, int airplane1Y, int airplane1Altitude,
+        public void Check_conditions_list_is_not_empty(int airplane1X, int airplane1Y, int airplane1Altitude,
             int airplane2X, int airplane2Y, int airplane2Altitude)
         {
             TestPlane1._xCoordiante = airplane1X;
