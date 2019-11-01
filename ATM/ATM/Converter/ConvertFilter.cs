@@ -15,7 +15,7 @@ namespace ATM.Converter
 
         public List<string> transponderData { get; set; }
 
-        private ITransponderReceiver _receiver;
+        public ITransponderReceiver _receiver;
         private ICompassCourse _compassCourse;
         private IVelocity _volocity;
 
