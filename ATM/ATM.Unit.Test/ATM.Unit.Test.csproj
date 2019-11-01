@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirplaneUnitTest.cs" />
     <Compile Include="AirplaneValidationUnitTest.cs" />
     <Compile Include="AirspaceUnitTest.cs" />
     <Compile Include="CheckSeparationConditionUnitTest.cs" />
