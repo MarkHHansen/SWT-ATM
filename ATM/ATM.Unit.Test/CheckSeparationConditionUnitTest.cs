@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,9 @@ namespace ATM.Unit.Test
         private Airplane TestPlane2;
         private List<Airplane> TestSeparationInAirspace;
         private IAirplaneValidation plane;
-
         private CheckSeparationCondition uut;
+        private CheckSeparationCondition _uut;
+        private IAirplaneValidation _planeSource;
         #endregion
 
         #region Act 
@@ -34,28 +36,68 @@ namespace ATM.Unit.Test
             TestSeparationInAirspace.Add(TestPlane1);
             TestSeparationInAirspace.Add(TestPlane2);
             uut = new CheckSeparationCondition();
+
+            _planeSource = Substitute.For<IAirplaneValidation>();
+            _uut = new CheckSeparationCondition(_planeSource);
         }
         #endregion
 
         #region Assert
-        [TestCase(400, 500, 10000, 10001, 10000, 10001)]
-        public void CheckCondition_GeneratesConditionList(int airplane1X, int airplane1Y, int airplane1Altitude,
-            int airplane2X, int airplane2Y, int airplane2Altitude)
+        [Test]
+        public void Test_event_is_recieved_from_ValidationEventArgs()
         {
-            TestPlane1._xCoordiante = airplane1X;
-            TestPlane1._yCoordiante = airplane1Y;
-            TestPlane1._Altitude = airplane1Altitude;
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            _planeSource.ValidationEvent += Raise.EventWith(new ValidationEventArgs(temp));
+            _planeSource.Received(1);
+        }
 
+        [TestCase(10, 10, 10, 10, 10, 500, 0, TestName = "Detection Planes Colliding Leaving Condition")]
+        [TestCase(10, 10, 10, 10, 10, 10, 1, TestName = "Detection Planes Colliding Leaving Condition")]
+        public void TestDetectPlanesRemove(int airplane1X, int airplane1Y, int airplane1Altitude,
+            int airplane2X, int airplane2Y, int airplane2Altitude, int result)
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                TestPlane1._xCoordiante = airplane1X;
+                TestPlane1._yCoordiante = airplane1Y;
+                TestPlane1._Altitude = airplane1Altitude;
+
+                TestPlane2._xCoordiante = airplane1X;
+                TestPlane2._yCoordiante = airplane1Y;
+                TestPlane2._Altitude = airplane1Altitude;
+                TestPlane1._Time = new DateTime(1990);
+                
+                uut.DetectCollisions(TestSeparationInAirspace);
+            }
             TestPlane2._xCoordiante = airplane2X;
             TestPlane2._yCoordiante = airplane2Y;
             TestPlane2._Altitude = airplane2Altitude;
-
-            //TestSeparationInAirspace.Add(TestPlane1);
-            //TestSeparationInAirspace.Add(TestPlane2);
+            TestPlane2._Time = new DateTime(2000);
 
             uut.DetectCollisions(TestSeparationInAirspace);
-            Assert.That(TestSeparationInAirspace, Is.Not.Null);
+
+            Assert.That(uut.GetCondition().Count, Is.EqualTo(result));
         }
+
+        //[TestCase(400, 500, 10000, 10001, 10000, 10001)]
+        //public void CheckCondition_GeneratesConditionList(int airplane1X, int airplane1Y, int airplane1Altitude,
+        //    int airplane2X, int airplane2Y, int airplane2Altitude)
+        //{
+        //    TestPlane1._xCoordiante = airplane1X;
+        //    TestPlane1._yCoordiante = airplane1Y;
+        //    TestPlane1._Altitude = airplane1Altitude;
+
+        //    TestPlane2._xCoordiante = airplane2X;
+        //    TestPlane2._yCoordiante = airplane2Y;
+        //    TestPlane2._Altitude = airplane2Altitude;
+
+        //    TestSeparationInAirspace.Add(TestPlane1);
+        //    TestSeparationInAirspace.Add(TestPlane2);
+
+        //    uut.DetectCollisions(TestSeparationInAirspace);
+        //    Assert.That(TestSeparationInAirspace, Is.Not.Null);
+        //}
 
         [TestCase(500, 500, 700, 700, 283, TestName = "Two planes are colliding in XY")]
         [TestCase(2000, 1000, 1400, 1500, 781, TestName = "Two planes are colliding in XY")]
@@ -101,39 +143,39 @@ namespace ATM.Unit.Test
             Assert.That(uut.CheckForCollision(TestPlane1, TestPlane2), Is.False);
         }
 
-        [TestCase(500, 500, 801, 500, 283, 1100, TestName = "Two planes are colliding")]
-        [TestCase(2000, 1000, 1000, 1400, 1500, 1100, TestName = "Two planes are colliding")]
-        public void Test_if_two_planes_are_colliding_inAltitude_AND_XY(int airplane1X, int airplane1Y, int airplane1Altitude,
-            int airplane2X, int airplane2Y, int airplane2Altitude)
-        {
-            TestPlane1._xCoordiante = airplane1X;
-            TestPlane1._yCoordiante = airplane1Y;
-            TestPlane1._Altitude = airplane1Altitude;
+        //[TestCase(500, 500, 801, 500, 283, 1100, TestName = "Two planes are colliding")]
+        //[TestCase(2000, 1000, 1000, 1400, 1500, 1100, TestName = "Two planes are colliding")]
+        //public void Test_if_two_planes_are_colliding_inAltitude_AND_XY(int airplane1X, int airplane1Y, int airplane1Altitude,
+        //    int airplane2X, int airplane2Y, int airplane2Altitude)
+        //{
+        //    TestPlane1._xCoordiante = airplane1X;
+        //    TestPlane1._yCoordiante = airplane1Y;
+        //    TestPlane1._Altitude = airplane1Altitude;
 
-            TestPlane2._xCoordiante = airplane2X;
-            TestPlane2._yCoordiante = airplane2Y;
-            TestPlane2._Altitude = airplane2Altitude;
+        //    TestPlane2._xCoordiante = airplane2X;
+        //    TestPlane2._yCoordiante = airplane2Y;
+        //    TestPlane2._Altitude = airplane2Altitude;
 
-            Assert.That(uut.CheckForCollision(TestPlane1, TestPlane2), Is.True);
-        }
+        //    Assert.That(uut.CheckForCollision(TestPlane1, TestPlane2), Is.True);
+        //}
 
-        [TestCase(25, 40, 200, 2000, 4000, 5000, 0, TestName = "Planes are not colliding")]
-        [TestCase(5000, 40, 200, 2000, 4000, 5000, 0, TestName = "Planes are not colliding")]
-        public void Test_planes_not_colliding(int airplane1X, int airplane1Y, int airplane1Altitude,
-            int airplane2X, int airplane2Y, int airplane2Altitude, double result)
-        {
-            TestPlane1._xCoordiante = airplane1X;
-            TestPlane1._yCoordiante = airplane1Y;
-            TestPlane1._Altitude = airplane1Altitude;
+        //[TestCase(25, 40, 200, 2000, 4000, 5000, 0, TestName = "Planes are not colliding")]
+        //[TestCase(5000, 40, 200, 2000, 4000, 5000, 0, TestName = "Planes are not colliding")]
+        //public void Test_planes_not_colliding(int airplane1X, int airplane1Y, int airplane1Altitude,
+        //    int airplane2X, int airplane2Y, int airplane2Altitude, double result)
+        //{
+        //    TestPlane1._xCoordiante = airplane1X;
+        //    TestPlane1._yCoordiante = airplane1Y;
+        //    TestPlane1._Altitude = airplane1Altitude;
 
-            TestPlane2._xCoordiante = airplane2X;
-            TestPlane2._yCoordiante = airplane2Y;
-            TestPlane2._Altitude = airplane2Altitude;
+        //    TestPlane2._xCoordiante = airplane2X;
+        //    TestPlane2._yCoordiante = airplane2Y;
+        //    TestPlane2._Altitude = airplane2Altitude;
 
-            uut.DetectCollisions(TestSeparationInAirspace);
+        //    uut.DetectCollisions(TestSeparationInAirspace);
 
-            Assert.That(uut.GetCondition(), Is.Not.Null);
-        }
+        //    Assert.That(uut.GetCondition(), Is.Not.Null);
+        //}
         #endregion
     }
 }
