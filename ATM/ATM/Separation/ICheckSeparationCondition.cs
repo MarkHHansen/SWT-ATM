@@ -8,6 +8,6 @@ namespace ATM.Separation
 {
     public interface ICheckSeparationCondition
     {
-        event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked; 
+        //event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked; 
     }
 }

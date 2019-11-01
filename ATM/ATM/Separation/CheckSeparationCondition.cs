@@ -16,14 +16,9 @@ namespace ATM.Separation
         private ConsoleLogger _consolelogger = new ConsoleLogger();
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
-        public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
+        //public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
         //public List<Airplane> _currentAirplane { get; set; }
         public List<SeparationCondition> Conditions;
-
-        public CheckSeparationCondition()
-        {
-
-        }
 
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
