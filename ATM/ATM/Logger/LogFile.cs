@@ -9,7 +9,8 @@ using ATM.Separation;
 
 namespace ATM.Logger
 {
-    public class LogFile 
+    
+    public class LogFile : ILogger
     {
         private System.IO.StreamWriter file;
         public List<string> Collision { get; set; }
