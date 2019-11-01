@@ -43,7 +43,7 @@ namespace ATM.Converter
         {
             List<Airplane> airplanes = new List<Airplane>();
 
-            foreach (var data in this.transponderData)
+            foreach (var data in this.transponderData) //Hvorfor bliver der kaldt this.trandponderData i stedet for den som givet med som parameter?
             {
                 string[] dataStrings = data.Split(';');
 
@@ -86,6 +86,11 @@ namespace ATM.Converter
         protected virtual void OnConvertedDataEvent(ConvertEventArgs e)
         {
             ConvertedDataEvent?.Invoke(this, e);
+        }
+
+        public List<Airplane> GetOldAirplanes()
+        {
+            return oldAirplanes;
         }
     }
 }

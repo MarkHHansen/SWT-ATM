@@ -13,6 +13,6 @@ namespace ATM.ValidateAirplane
         {
             this.PlanesToValidate = planestovalidate;
         }
-        public List<Airplane> PlanesToValidate { get; }
+        public List<Airplane> PlanesToValidate { get; set; }
     };
 };
