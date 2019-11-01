@@ -16,10 +16,9 @@ namespace ATM.Separation
         private ConsoleLogger _consolelogger = new ConsoleLogger();
         private int _minVertical = 300;
         private int _minHorizontal = 5000;
-        public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
+        //public event EventHandler<PlaneConditionCheckedEventArgs> PlaneConditionChecked;
         //public List<Airplane> _currentAirplane { get; set; }
         public List<SeparationCondition> Conditions;
-
 
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
@@ -80,10 +79,6 @@ namespace ATM.Separation
         public  int CheckAltitude(Airplane airplane1, Airplane airplane2)
         {
             double difference = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
-            if (difference < 0)
-            {
-                difference = difference * (-1);
-            }
 
             return Convert.ToInt32(difference);
         }
