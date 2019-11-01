@@ -68,9 +68,10 @@ namespace ATM.Unit.Test
 
         [TestCase(800, 1100, 300, TestName = "Two planes are colliding in altitude")]
         [TestCase(1000, 1100,100, TestName = "Two planes are colliding in altitude")]
+        [TestCase(-1000, -1100, 100, TestName = "Two planes are colliding in altitude")]
         [TestCase(1000, 5000 , 4000, TestName = "Two planes are not colliding in altitude")]
         [TestCase(10000, 20000, 10000, TestName = "Two planes are not colliding in altitude")]
-        public void Test_distance_between_two_plane_in_Altitude(int airplane1Altitude, int airplane2Altitude,
+        public void Test_distance_between_two_plane_in_Altitude(double airplane1Altitude, double airplane2Altitude,
             double result)
         {
             TestPlane1._Altitude = airplane1Altitude;
@@ -111,8 +112,8 @@ namespace ATM.Unit.Test
             Assert.That(_uut.CheckForCollision(TestPlane1, TestPlane2), Is.True);
         }
 
-        [TestCase(10, 10, 10, 10, 10, 500, 0, TestName = "Detection Planes Colliding Leaving Condition")]
-        public void TestDetectPlanesRemove(int airplane1X, int airplane1Y, int airplane1Altitude,
+        [TestCase(8000, 8000, 8000, 8000, 8000, 500, 0, TestName = "Detection Planes Colliding Leaving Condition")]
+        public void Test_taht_detected_planes_are_removed(int airplane1X, int airplane1Y, int airplane1Altitude,
             int airplane2X, int airplane2Y, int airplane2Altitude, int result)
         {
             for (int i = 0; i < 1; i++)
@@ -157,7 +158,7 @@ namespace ATM.Unit.Test
         }
 
         [TestCase(400, 500, 10000, 10001, 10000, 10001)]
-        public void CheckCondition_GeneratesConditionList(int airplane1X, int airplane1Y, int airplane1Altitude,
+        public void CheckCondition_makes_conditions_list(int airplane1X, int airplane1Y, int airplane1Altitude,
             int airplane2X, int airplane2Y, int airplane2Altitude)
         {
             TestPlane1._xCoordiante = airplane1X;
