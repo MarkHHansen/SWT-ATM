@@ -62,7 +62,7 @@ namespace ATM.Unit.Test
         {
             Assert.That(_receivedEventArgs, Is.Null);
         }
-
+        /*
         [Test]
         public void Validation_RaiseEvent()
         {
@@ -83,7 +83,7 @@ namespace ATM.Unit.Test
             rec.ValidationEvent += Raise.EventWith(this, new ValidationEventArgs(temp));
 
             Assert.NotNull(valarg);
-        }
+        }*/
 
         #endregion
     }

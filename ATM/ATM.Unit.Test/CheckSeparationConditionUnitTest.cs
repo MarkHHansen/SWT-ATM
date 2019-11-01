@@ -37,7 +37,7 @@ namespace ATM.Unit.Test
             uut = new CheckSeparationCondition(plane);
         }
         #endregion
-
+        /*
         #region Assert
         [TestCase(25,40,200,2000,4000,5000,0, TestName = "Planes are not colliding")]
         [TestCase(5000, 40, 200, 2000, 4000, 5000, 0, TestName = "Planes are not colliding")]
@@ -57,6 +57,6 @@ namespace ATM.Unit.Test
             Assert.That(uut.GetCondition().Count, Is.EqualTo(result));
         }
         #endregion
-
+    */
     }
 }

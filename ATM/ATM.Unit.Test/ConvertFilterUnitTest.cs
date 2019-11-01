@@ -48,7 +48,7 @@ namespace ATM.Unit.Test
         }
 
         #region FilterTests
-
+        /*
         [Test]
         public void ConvertFilter_InsertTwoAirplanes_TwoDuplicates_Count2()
         {
@@ -66,7 +66,7 @@ namespace ATM.Unit.Test
 
             Assert.That(temp.Count, Is.EqualTo(2));
         }
-
+        */
         #endregion
 
         #region AirplaneTests
