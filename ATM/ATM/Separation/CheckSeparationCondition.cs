@@ -79,10 +79,6 @@ namespace ATM.Separation
         public  int CheckAltitude(Airplane airplane1, Airplane airplane2)
         {
             double difference = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
-            if (difference < 0)
-            {
-                difference = difference * (-1);
-            }
 
             return Convert.ToInt32(difference);
         }

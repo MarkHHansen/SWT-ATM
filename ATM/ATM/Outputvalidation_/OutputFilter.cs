@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace ATM.OutputValidation_
 
         public IAirplaneValidation _airplaneValidation;
         ConsoleLogger consolelogger = new ConsoleLogger();
+
 
 
         //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
@@ -46,7 +48,9 @@ namespace ATM.OutputValidation_
         private void HandleValidationEvent(object sender, ValidationEventArgs e)
         {
             List<Airplane> CurrentAirplanes = e.PlanesToValidate;
+            consolelogger.Clear();
             consolelogger.PrintAirplanes(CurrentAirplanes);
         }
+
     }
 }
