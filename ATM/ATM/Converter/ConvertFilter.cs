@@ -84,9 +84,5 @@ namespace ATM.Converter
             OnConvertedDataEvent(new ConvertEventArgs(airplanes));
             oldAirplanes = airplanes;
         }
-        public List<Airplane> GetOldAirplanes()
-        {
-            return oldAirplanes;
-        }
     }
 }

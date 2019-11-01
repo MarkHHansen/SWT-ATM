@@ -23,6 +23,7 @@ namespace ATM.Unit.Test
         private CheckSeparationCondition uut;
         private CheckSeparationCondition _uut;
         private IAirplaneValidation _planeSource;
+        private SeparationCondition _sepcond;
         #endregion
 
         #region Act 
