@@ -20,6 +20,11 @@ namespace ATM.Unit.Test
         private IConvertFilter _tempRec = Substitute.For<IConvertFilter>();
         private IAirplaneValidation rec = Substitute.For<IAirplaneValidation>();
 
+        #region EventTests
+
+        
+
+       
         [SetUp]
         public void SetUp()
         {
@@ -53,6 +58,12 @@ namespace ATM.Unit.Test
         }
 
         [Test]
+        public void EventUnchanged_DataNull()
+        {
+            Assert.That(_receivedEventArgs, Is.Null);
+        }
+
+        [Test]
         public void Validation_RaiseEvent()
         {
 
@@ -73,5 +84,7 @@ namespace ATM.Unit.Test
 
             Assert.NotNull(valarg);
         }
+
+        #endregion
     }
 }
