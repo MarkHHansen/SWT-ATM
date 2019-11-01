@@ -9,6 +9,7 @@ using NUnit.Framework;
 using TransponderReceiver;
 using ATM.OutputValidation_;
 using ATM.ValidateAirplane;
+using Castle.Core.Logging;
 
 namespace ATM.Unit.Test
 {
@@ -17,6 +18,7 @@ namespace ATM.Unit.Test
     {
         private OutputFilter _uut;
         private IAirplaneValidation _planeSource;
+        private ConsoleLogger _logger;
 
         #region EventTests
 
@@ -48,8 +50,11 @@ namespace ATM.Unit.Test
 
             _planeSource.ValidationEvent += Raise.EventWith(new ValidationEventArgs(temp));
             _planeSource.Received(1);
+            
 
-          
+            //Test af clear
+            
+
         }
         #endregion
 
