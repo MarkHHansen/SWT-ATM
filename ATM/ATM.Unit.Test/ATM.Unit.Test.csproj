@@ -75,7 +75,6 @@
     <Compile Include="AirspaceUnitTest.cs" />
     <Compile Include="CheckSeparationConditionUnitTest.cs" />
     <Compile Include="ClientUnitTest.cs" />
-    <Compile Include="CollisionTest.cs" />
     <Compile Include="CompassCourseUnitTest.cs" />
     <Compile Include="ConvertFilterUnitTest.cs" />
     <Compile Include="LogfileUnitTest.cs" />
