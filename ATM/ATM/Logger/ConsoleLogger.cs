@@ -7,9 +7,8 @@ using ATM.Converter;
 
 namespace ATM.Logger
 {
-    public class ConsoleLogger : ILogger
+    public class ConsoleLogger : IConLogger
     {
-        private LogFile sep = new LogFile(); 
         public void PrintAirplanes(List<Airplane> airplanes)
         {
             foreach (var plane in airplanes)
@@ -19,10 +18,6 @@ namespace ATM.Logger
                 Console.WriteLine("\n");
 
             }
-        }
-        public void PrintCollision()
-        {
-            Console.WriteLine(@"Collision: " + sep.Collision);
         }
     }
 }
