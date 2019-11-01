@@ -70,9 +70,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirplaneUnitTest.cs" />
     <Compile Include="AirplaneValidationUnitTest.cs" />
     <Compile Include="AirspaceUnitTest.cs" />
     <Compile Include="CheckSeparationConditionUnitTest.cs" />
+    <Compile Include="ClientUnitTest.cs" />
     <Compile Include="CollisionTest.cs" />
     <Compile Include="CompassCourseUnitTest.cs" />
     <Compile Include="ConvertFilterUnitTest.cs" />
