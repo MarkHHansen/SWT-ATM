@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Outputvalidation_\IOutputFilter.cs" />
     <Compile Include="Outputvalidation_\LogSeperationEventArgs.cs" />
     <Compile Include="Outputvalidation_\OutputFilter.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Converter\Velocity.cs" />
     <Compile Include="Converter\IConvertFilter.cs" />
     <Compile Include="Separation\ICheckSeparationCondition.cs" />
-    <Compile Include="Logger\ILogger.cs" />
+    <Compile Include="Logger\IConLogger.cs" />
     <Compile Include="Logger\LogFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

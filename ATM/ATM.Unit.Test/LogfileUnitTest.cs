@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Converter;
 using ATM.Logger;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace ATM.Unit.Test
@@ -13,29 +15,31 @@ namespace ATM.Unit.Test
     public class LogfileUnitTest
     {
         #region Arrange
-        private LogFile __uut; 
+        private LogFile _Loguut;
+        private IConLogger _Conuut;
         #endregion
 
         #region Act 
         [SetUp]
         public void Setup()
         {
-            __uut = new LogFile();
+            _Conuut = Substitute.For<IConLogger>();
+            _Loguut = new LogFile();
         }
         #endregion
 
-        #region Assert
+        #region AssertLogFile
         [Test]
         public void Test_make_folder_false()
         {
-            __uut.MakeFolder();
+            _Loguut.MakeFolder();
             if (Directory.Exists(@"..\Logs"))
             {
                 Directory.Delete(@"..\Logs");
             }
             Assert.That(System.IO.Directory.Exists(@"..\Logs"), Is.False);
         }
-
+        /*
         [Test]
         public void Test_make_file_false()
         {
@@ -44,28 +48,69 @@ namespace ATM.Unit.Test
             {
                 Directory.Delete(@"..\Logs\Logs.txt");
             }
-            Assert.That(Directory.Exists(@"..\Logs\Logs.txt"), Is.False);
-        }
+            Assert.That(Directory.Exists(@"..\Logs\Logs.txt"), Is.Null);
+        }*/
 
         [Test]
         public void Test_make_folder_true()
         {
-            __uut.MakeFolder();
+            _Loguut.MakeFolder();
             Assert.That(System.IO.Directory.Exists(@"..\Logs"), Is.True);
         }
 
+
         [Test]
-        public void Test_make_file_true()
+        public void Test_log_Collission_print()
         {
-            __uut.MakeFile();
-            Assert.That(Directory.Exists(@"..\Logs\Logs.txt"), Is.True);
+            List<string> temp = new List<string>();
+            temp.Add("Collision between HJ300 and HJ300");
+            _Loguut.LogCollision(temp);
         }
 
-        [TestCase("Collision between HJ300 and HJ300")]
-        public void Test_log_Collission_print(string messages)
+        [Test]
+        public void TestVarCollision_Get()
         {
-            //__uut.LogCollision(messages);
+            List<string> temp = new List<string>();
+            temp.Add("AAXX01 og AAXX02");
+
+            _Loguut.Collision = temp;
+
+            Assert.That(_Loguut.Collision, Is.EqualTo(temp));
         }
+        #endregion
+
+        #region AssertConsoleLogger
+
+        [Test]
+        public void ConsoleLogger_PrintPlanes_TwoPlanes()
+        {
+            List<Airplane> temp = new List<Airplane>();
+            Airplane ap1 = new Airplane();
+            ap1._tag = "AAXX01";
+            ap1._xCoordiante = 30000;
+            ap1._yCoordiante = 30000;
+            ap1._Altitude = 1800;
+            ap1._Time = DateTime.Today;
+            ap1._compasCourse = 60.0;
+            ap1._seperationCodition = false;
+            ap1._velocity = 8000.0;
+            Airplane ap2 = new Airplane();
+            ap2._tag = "AAXX02";
+            ap2._xCoordiante = 35000;
+            ap2._yCoordiante = 35000;
+            ap2._Altitude = 1700;
+            ap2._Time = DateTime.Today;
+            ap2._compasCourse = 60.0;
+            ap2._seperationCodition = false;
+            ap2._velocity = 8000.0;
+            temp.Add(ap1);
+            temp.Add(ap2);
+
+            _Conuut.PrintAirplanes(temp);
+
+            _Conuut.Received(1).PrintAirplanes(temp);
+        }
+
         #endregion
     }
 }

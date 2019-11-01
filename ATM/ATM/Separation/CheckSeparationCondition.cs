@@ -57,7 +57,6 @@ namespace ATM.Separation
                             });
 
                             Conditions.Add(newCondition);
-                            _consolelogger.PrintCollision();
                         }
                     }
 
