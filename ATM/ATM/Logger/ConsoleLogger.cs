@@ -19,5 +19,10 @@ namespace ATM.Logger
 
             }
         }
+
+        public void Clear()
+        {
+            Console.Clear();
+        }
     }
 }

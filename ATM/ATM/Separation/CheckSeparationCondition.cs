@@ -20,10 +20,6 @@ namespace ATM.Separation
         //public List<Airplane> _currentAirplane { get; set; }
         public List<SeparationCondition> Conditions;
 
-        public CheckSeparationCondition()
-        {
-
-        }
 
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
