@@ -20,6 +20,11 @@ namespace ATM.Separation
         //public List<Airplane> _currentAirplane { get; set; }
         public List<SeparationCondition> Conditions;
 
+        public CheckSeparationCondition()
+        {
+
+        }
+
         public CheckSeparationCondition(IAirplaneValidation plane)
         {
             plane.ValidationEvent += HandleAirplaneValidationEvent;
@@ -52,6 +57,7 @@ namespace ATM.Separation
                             });
 
                             Conditions.Add(newCondition);
+                            _consolelogger.PrintCollision();
                         }
                     }
 
@@ -63,15 +69,20 @@ namespace ATM.Separation
             }
         }
 
-        private double CheckAltitude(Airplane airplane1, Airplane airplane2)
+        public List<SeparationCondition> GetCondition()
+        {
+            return Conditions;
+        }
+
+        public  int CheckDistance(Airplane airplane1, Airplane airplane2)
         {
             double yPow = (Math.Pow(Math.Abs(airplane1._yCoordiante - airplane2._yCoordiante), 2));
             double xPow = (Math.Pow(Math.Abs(airplane1._xCoordiante - airplane2._xCoordiante), 2));
             double distance = Math.Sqrt(xPow + yPow);
-            return distance;
+            return Convert.ToInt32(distance); ;
         }
 
-        private double CheckDistance(Airplane airplane1, Airplane airplane2)
+        public  int CheckAltitude(Airplane airplane1, Airplane airplane2)
         {
             double difference = (Math.Abs(airplane1._Altitude - airplane2._Altitude));
             if (difference < 0)
@@ -79,7 +90,7 @@ namespace ATM.Separation
                 difference = difference * (-1);
             }
 
-            return difference;
+            return Convert.ToInt32(difference);
         }
         public bool CheckForCollision(Airplane airplane1, Airplane airplane2)
         {

@@ -11,10 +11,9 @@ namespace ATM.OutputValidation_
 {
     public class OutputFilter
     {
-        private ILogger _consoleLogger;
-        private ILogger _ILogger;
-        private List<Airplane> _oldplane;
-        private IAirplaneValidation _airplaneValidation;
+
+
+        public IAirplaneValidation _airplaneValidation;
         ConsoleLogger consolelogger = new ConsoleLogger();
 
 
@@ -35,14 +34,7 @@ namespace ATM.OutputValidation_
         //    LogSeperationEvent?.Invoke(this, e);
         //}
 
-
-
-        public void CleanUp()
-        {
-
-        }
-
-      //  public List<Airplane> CurrentAirplanes { get; set; }
+        //  public List<Airplane> CurrentAirplanes { get; set; }
 
         public OutputFilter(IAirplaneValidation airplaneValidation)
         {

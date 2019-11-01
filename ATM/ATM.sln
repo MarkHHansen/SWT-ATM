@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM", "ATM\ATM.csproj", "{B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM.Unit.Test", "ATM.Unit.Test\ATM.Unit.Test.csproj", "{F96315AD-4B31-414C-A2A6-86E518D3D785}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DF24CD40-8A93-46CC-B9DE-3D15E448570B}"
+	ProjectSection(SolutionItems) = preProject
+		dotCoverCoverageConfig.xml = dotCoverCoverageConfig.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

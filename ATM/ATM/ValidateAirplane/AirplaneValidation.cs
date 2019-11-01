@@ -8,7 +8,7 @@ namespace ATM.ValidateAirplane
 {
     public class AirplaneValidation : IAirplaneValidation
     {
-        private IConvertFilter _receiver;
+        public IConvertFilter _receiver;
         private List<Airplane> Validated = new List<Airplane>();
         private Airspace _airspace = new Airspace();
 

@@ -14,17 +14,15 @@ namespace ATM
 {
     class Program
     {
-        
-
         static void Main(string[] args)
         {
             Client client = new Client();
 
             while (true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
+                
             }
         }
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiver;
@@ -14,7 +13,6 @@ namespace ATM.Unit.Test
     {
         private ConvertFilter _uut;
         private RawTransponderDataEventArgs _dataEventArgs;
-        private ConvertEventArgs _convertEventArgs;
         private ITransponderReceiver _fakereceiver;
         private ICompassCourse _fakecompassCourse;
         private IVelocity _fakevelocity;
@@ -31,7 +29,7 @@ namespace ATM.Unit.Test
 
 
         [Test]
-        public void Test_Event_Received()
+        public void TestEvent()
         {
             // Arrange
             List<string> testData = new List<string>();
@@ -39,7 +37,7 @@ namespace ATM.Unit.Test
             testData.Add("BCD123;10005;85890;12000;20151006213456789");
             testData.Add("XYZ987;25059;75654;4000;20151006213456789");
 
-            _fakereceiver.TransponderDataReady += (o, e) => { _dataEventArgs = e; };
+            _uut._receiver.TransponderDataReady += (o, e) => { _dataEventArgs = e; };
 
             // Act: Trigger the fake object to execute event invocation
             _fakereceiver.TransponderDataReady
@@ -49,58 +47,98 @@ namespace ATM.Unit.Test
             Assert.NotNull(_dataEventArgs);
         }
 
+        #region FilterTests
+        /*
         [Test]
-        public void Test_Event_Rised()
+        public void ConvertFilter_InsertTwoAirplanes_TwoDuplicates_Count2()
         {
-            // Arrange
             List<string> testData = new List<string>();
             testData.Add("ATR423;39045;12932;14000;20151006213456789");
             testData.Add("BCD123;10005;85890;12000;20151006213456789");
-            testData.Add("XYZ987;25059;75654;4000;20151006213456789");
-
-            // Act
-            _fakereceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(testData));
-
-            // Assert
-            Assert.That(_uut.transponderData, Is.EqualTo(testData));
-        }
-
-        [Test]
-        public void Test_Convert_Data_Funktion()
-        {
-            // Arrange
-            List<string> testData = new List<string>();
-            testData.Add("XYZ987;25059;75654;4000;20151006213456789");
-
-            // Act
             _uut.convertdata(testData);
-
-            Assert.Multiple((() =>
-            {
-                Assert.That(_uut.oldAirplanes.Last()._tag, Is.EqualTo("XYZ987"));
-                Assert.That(_uut.oldAirplanes.Last()._xCoordiante, Is.EqualTo(25059));
-                Assert.That(_uut.oldAirplanes.Last()._yCoordiante, Is.EqualTo(75654));
-                Assert.That(_uut.oldAirplanes.Last()._Altitude, Is.EqualTo(4000));
-                Assert.That(_uut.oldAirplanes.Last()._Time, Is.EqualTo(new DateTime(2015, 10, 06, 21, 34, 56, 789)));
-            }));
-        }
-
-        [Test]
-        public void Test_Convert_Data_Funktion_Velocity()
-        {
-            // Arrange
             
-            // Act
+            List<string> testdata2 = new List<string>();
+            testdata2.Add("ATR423;25059;75654;4000;20151006213456789");
+            _uut.convertdata(testdata2);
 
-            // Assert
-            Assert.That(_uut.oldAirplanes.Last()._velocity, Is.EqualTo(1.7950549357115013438));
+            List<Airplane> temp = _uut.GetOldAirplanes();
+
+
+            Assert.That(temp.Count, Is.EqualTo(2));
+        }
+        */
+        #endregion
+
+        #region AirplaneTests
+
+        private Airplane plane;
+        [SetUp]
+        public void SetUp()
+        {
+            plane = new Airplane();
         }
 
         [Test]
-        public void Test_Convert_Data_Funktion_CompassCourse()
+        public void setTag_Correct()
         {
+            plane._tag = "AAXX01";
 
+            Assert.That(plane._tag, Is.EqualTo("AAXX01"));
         }
 
+        [Test]
+        public void getTag_Correct()
+        {
+            plane._tag = "AAXX01";
+            string temp = plane._tag;
+
+            Assert.That(plane._tag, Is.EqualTo(temp));
+        }
+
+        [Test]
+        public void setSeperation_Correct()
+        {
+            plane._seperationCodition = true;
+
+            Assert.That(plane._seperationCodition, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void getSeperation_Correct()
+        {
+            plane._seperationCodition = true;
+            bool temp = plane._seperationCodition;
+
+            Assert.That(temp, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void getTime_Correct()
+        {
+            DateTime dt = new DateTime(1974, 10, 9, 8, 5, 3);
+            plane._Time = dt;
+            DateTime temp = plane._Time;
+
+            Assert.That(temp, Is.EqualTo(dt));
+        }
+
+        [Test]
+        public void getCompasCourse_Correct()
+        {
+            plane._compasCourse = 160.0;
+            double temp = plane._compasCourse;
+
+            Assert.That(temp, Is.EqualTo(160.0));
+        }
+
+        [Test]
+        public void getVelocity_Correct()
+        {
+            plane._velocity = 7000;
+            double temp = plane._velocity;
+
+            Assert.That(temp, Is.EqualTo(7000));
+        }
+        #endregion
     }
 }

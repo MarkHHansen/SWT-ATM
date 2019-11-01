@@ -12,7 +12,7 @@ namespace ATM.Logger
     public class LogFile 
     {
         private System.IO.StreamWriter file;
-        public string Collision { get; set; }
+        public List<string> Collision { get; set; }
         public LogFile()
         {
         }
@@ -31,19 +31,16 @@ namespace ATM.Logger
             file.Close();
         }
 
-        void MakeFile()
+        public void MakeFile()
         {
-            if (!Directory.Exists(@"..\logs\Logs.txt"))
-            {
-                file = File.AppendText(@"C:..\Logs\Logs.txt");
-            }
+            file = File.AppendText(@"C:..\Logs\Logs.txt");
         }
 
         public void MakeFolder()
         {
-            if (!Directory.Exists(@"..\logs"))
+            if (!Directory.Exists(@"..\Logs"))
             {
-                Directory.CreateDirectory(@"..\logs");
+                Directory.CreateDirectory(@"..\Logs");
             }
         }
 
