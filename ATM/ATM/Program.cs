@@ -21,7 +21,7 @@ namespace ATM
 
             while (true)
             {
-                Thread.Sleep(200);
+                Thread.Sleep(201);
                 
                 
             }
