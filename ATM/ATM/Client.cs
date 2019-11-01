@@ -14,8 +14,8 @@ namespace ATM
 {
     public class Client
     {
-        private ConvertFilter _convertFilter;
-        private AirplaneValidation _airplaneValidation;
+        private IConvertFilter _convertFilter;
+        private IAirplaneValidation _airplaneValidation;
         private CheckSeparationCondition _separationCondition;
         private OutputFilter _outputFilter;
 
