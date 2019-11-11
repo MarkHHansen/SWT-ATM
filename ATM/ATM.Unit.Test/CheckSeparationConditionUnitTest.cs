@@ -157,6 +157,29 @@ namespace ATM.Unit.Test
             _uut.DetectCollisions(TestSeparationInAirspace);
             Assert.That(TestSeparationInAirspace, Is.Not.Null);
         }
+
+        [TestCase(5000, 5000, 5000, 19000, 19000, 15000, 0, TestName = "Detect planes not colliding")]
+        [TestCase(1000, 1000, 500, 12000, 12000, 11000, 0, TestName = "Detect planes not colliding")]
+        [TestCase(6800, 4500, 1000, 6500, 4700, 1100, 0, TestName = "Detect planes colliding")]
+        [TestCase(10, 10, 10, 10, 10, 10, 0, TestName = "Detect planes colliding")]
+        public void Test_planes_are_detected(int airplane1X, int airplane1Y, int airplane1Altitude,
+            int airplane2X, int airplane2Y, int airplane2Altitude, int result)
+        {
+            TestPlane1._xCoordiante = airplane1X;
+            TestPlane1._yCoordiante = airplane1Y;
+            TestPlane1._Altitude = airplane1Altitude;
+            TestPlane1._tag = "HJJAS3d";
+            TestPlane1._Time = new DateTime(2019, 11, 11);
+
+            TestPlane2._xCoordiante = airplane2X;
+            TestPlane2._yCoordiante = airplane2Y;
+            TestPlane2._Altitude = airplane2Altitude;
+            TestPlane2._tag = "HAASKJD2";
+            TestPlane2._Time = new DateTime(2019, 11, 11);
+            _uut.DetectCollisions(TestSeparationInAirspace);
+
+            Assert.That(_uut.GetCondition().Count, Is.EqualTo(result));
+        }
         #endregion
     }
 }
