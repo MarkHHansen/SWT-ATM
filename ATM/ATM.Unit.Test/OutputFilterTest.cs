@@ -34,7 +34,7 @@ namespace ATM.Unit.Test
 
 
         }
-
+        /*
         [Test]
         public void TestEvent()
         {
@@ -56,11 +56,12 @@ namespace ATM.Unit.Test
             
 
             //Test af clear
-        }
+        }*/
 
         [Test]
         public void TestConsoleLogger()
         {
+            IConLogger _logger = Substitute.For<IConLogger>();
             List<Airplane> temp = new List<Airplane>();
             Airplane airplane = new Airplane();
             airplane._yCoordiante = 23456;
