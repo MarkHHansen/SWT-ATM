@@ -85,6 +85,26 @@ namespace ATM.Unit.Test
             Assert.NotNull(valarg);
         }*/
 
+        [Test]
+        public void AirplaneInAirspaceTrue()
+        {
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            airplane._yCoordiante = 23456;
+            airplane._xCoordiante = 30000;
+            airplane._Altitude = 2000;
+            airplane._compasCourse = 60.0;
+            airplane._velocity = 1000.0;
+            airplane._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            temp.Add(airplane);
+
+            _tempRec.ConvertedDataEvent += Raise.EventWith(this, new ConvertEventArgs(temp));
+
+            Assert.That(_receivedEventArgs.ConvertedData, Is.EqualTo(temp));
+        }
+
         #endregion
     }
 }

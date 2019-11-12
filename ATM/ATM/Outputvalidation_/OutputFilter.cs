@@ -18,26 +18,6 @@ namespace ATM.OutputValidation_
         ConsoleLogger consolelogger = new ConsoleLogger();
 
 
-
-        //public event EventHandler<LogSeperationEventArgs> LogSeperationEvent;
-
-
-        //public void LogPlanes(List<Airplane> ap)
-        //{
-        //    if (ap != _oldplane)
-        //    {
-        //        OnLogSeperationEventArgs(new LogSeperationEventArgs(_oldplane) { planesToLog = ap });
-        //        _oldplane = ap;
-        //    }
-        //}
-
-        //protected virtual void OnLogSeperationEventArgs(LogSeperationEventArgs e)
-        //{
-        //    LogSeperationEvent?.Invoke(this, e);
-        //}
-
-        //  public List<Airplane> CurrentAirplanes { get; set; }
-
         public OutputFilter(IAirplaneValidation airplaneValidation)
         {
             this._airplaneValidation = airplaneValidation;

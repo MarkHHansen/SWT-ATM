@@ -4,12 +4,12 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Globalization;
 using ATM.Converter;
+using ATM.Logger;
 using NSubstitute;
 using NUnit.Framework;
 using TransponderReceiver;
 using ATM.OutputValidation_;
 using ATM.ValidateAirplane;
-using Castle.Core.Logging;
 
 namespace ATM.Unit.Test
 {
@@ -38,6 +38,7 @@ namespace ATM.Unit.Test
         [Test]
         public void TestEvent()
         {
+            _logger = new ConsoleLogger();
             List<Airplane> temp = new List<Airplane>();
             Airplane airplane = new Airplane();
             airplane._yCoordiante = 23456;
@@ -48,13 +49,33 @@ namespace ATM.Unit.Test
             airplane._Time =
                 DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
 
+            temp.Add(airplane);
+
             _planeSource.ValidationEvent += Raise.EventWith(new ValidationEventArgs(temp));
             _planeSource.Received(1);
             
 
             //Test af clear
-            
+        }
 
+        [Test]
+        public void TestConsoleLogger()
+        {
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            airplane._yCoordiante = 23456;
+            airplane._xCoordiante = 30000;
+            airplane._Altitude = 2000;
+            airplane._compasCourse = 60.0;
+            airplane._velocity = 1000.0;
+            airplane._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            temp.Add(airplane);
+
+            _logger.PrintAirplanes(temp);
+
+            _logger.Received(1);
         }
         #endregion
 
