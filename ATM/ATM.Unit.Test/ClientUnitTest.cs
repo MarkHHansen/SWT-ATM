@@ -43,11 +43,10 @@ namespace ATM.Unit.Test
         {
             Assert.NotNull(main);
         }
-
         [Test]
         public void MainExTest()
         {
-            
+
         }
     }
 }

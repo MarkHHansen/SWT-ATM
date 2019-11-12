@@ -78,7 +78,6 @@
     <Compile Include="CompassCourseUnitTest.cs" />
     <Compile Include="ConvertFilterUnitTest.cs" />
     <Compile Include="LogfileUnitTest.cs" />
-    <Compile Include="Logger\OutputFilterTest.cs" />
     <Compile Include="OutputFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationConditionTest.cs" />
