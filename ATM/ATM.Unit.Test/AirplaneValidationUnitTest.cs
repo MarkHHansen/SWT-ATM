@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Converter;
 using ATM.ValidateAirplane;
+using Castle.Core.Internal;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -105,6 +106,56 @@ namespace ATM.Unit.Test
             Assert.That(_receivedEventArgs.ConvertedData, Is.EqualTo(temp));
         }
 
+        [Test]
+        public void NoAirplaneInAirspace()
+        {
+            
+
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            airplane._yCoordiante = 1;
+            airplane._xCoordiante = 30000;
+            airplane._Altitude = 2000;
+            airplane._compasCourse = 60.0;
+            airplane._velocity = 1000.0;
+            airplane._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            temp.Add(airplane);
+
+            Assert.That(_uut.CheckAirplaneInAirSpace(temp).IsNullOrEmpty());
+        }
+
+        [Test]
+        public void TwoAirplanesOneValidated()
+        {
+            Airplane airplane2 = new Airplane();
+            airplane2._yCoordiante = 23456;
+            airplane2._xCoordiante = 30000;
+            airplane2._Altitude = 2000;
+            airplane2._compasCourse = 60.0;
+            airplane2._velocity = 1000.0;
+            airplane2._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            airplane._yCoordiante = 1;
+            airplane._xCoordiante = 30000;
+            airplane._Altitude = 2000;
+            airplane._compasCourse = 60.0;
+            airplane._velocity = 1000.0;
+            airplane._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            temp.Add(airplane);
+            temp.Add(airplane2);
+
+            List<Airplane> Result =new List<Airplane>();
+            Result.Add(airplane2);
+            
+            Assert.That(_uut.CheckAirplaneInAirSpace(temp), Is.EqualTo(Result));
+        }
         #endregion
     }
 }

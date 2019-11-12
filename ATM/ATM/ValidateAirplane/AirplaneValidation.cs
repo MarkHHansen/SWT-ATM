@@ -26,9 +26,16 @@ namespace ATM.ValidateAirplane
         {
 
             List<Airplane> temp = e.ConvertedData;
-            List< Airplane> TempValidated = new List<Airplane>();
-            int[] stats = _airspace.getAirspaceLimits();
+            List< Airplane> TempValidated = CheckAirplaneInAirSpace(temp);
+            
+            OnCheckSeperationCondition(new ValidationEventArgs(TempValidated));
 
+        }
+
+        public List<Airplane> CheckAirplaneInAirSpace(List<Airplane> temp)
+        {
+            List<Airplane> TempValidated = new List<Airplane>();
+            int[] stats = _airspace.getAirspaceLimits();
             foreach (var data in temp)
             {
 
@@ -44,9 +51,7 @@ namespace ATM.ValidateAirplane
                 }
             }
 
-
-            OnCheckSeperationCondition(new ValidationEventArgs(TempValidated));
-
+            return TempValidated;
         }
 
         //private void Validate(object s, ValidationEventArgs e)

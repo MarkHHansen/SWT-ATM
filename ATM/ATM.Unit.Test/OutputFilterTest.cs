@@ -38,7 +38,6 @@ namespace ATM.Unit.Test
         [Test]
         public void TestEvent()
         {
-            _logger = new ConsoleLogger();
             List<Airplane> temp = new List<Airplane>();
             Airplane airplane = new Airplane();
             airplane._yCoordiante = 23456;
@@ -49,13 +48,8 @@ namespace ATM.Unit.Test
             airplane._Time =
                 DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
 
-            temp.Add(airplane);
-
             _planeSource.ValidationEvent += Raise.EventWith(new ValidationEventArgs(temp));
             _planeSource.Received(1);
-            
-
-            //Test af clear
         }*/
 
         [Test]
@@ -80,9 +74,9 @@ namespace ATM.Unit.Test
         }
         #endregion
 
-        
 
-        
+
+
 
 
     }

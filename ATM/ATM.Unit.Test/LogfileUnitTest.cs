@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.Converter;
 using ATM.Logger;
+using ATM.ValidateAirplane;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -17,6 +18,7 @@ namespace ATM.Unit.Test
         #region Arrange
         private LogFile _Loguut;
         private IConLogger _Conuut;
+
         #endregion
 
         #region Act 
