@@ -34,7 +34,10 @@ namespace ATM.Logger
 
         public void MakeFile()
         {
-            file = File.AppendText(@"C:..\Logs\Logs.txt");
+            if (!Directory.Exists(@"..\Logs\Logs.txt"))
+            {
+                file = File.AppendText(@"C:..\Logs\Logs.txt");
+            }
         }
 
         public void MakeFolder()
