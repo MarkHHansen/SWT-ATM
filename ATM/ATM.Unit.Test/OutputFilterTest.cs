@@ -61,7 +61,7 @@ namespace ATM.Unit.Test
         [Test]
         public void TestConsoleLogger()
         {
-            IConLogger _logger = Substitute.For<IConLogger>();
+            _logger = new ConsoleLogger();
             List<Airplane> temp = new List<Airplane>();
             Airplane airplane = new Airplane();
             airplane._yCoordiante = 23456;
@@ -76,7 +76,7 @@ namespace ATM.Unit.Test
 
             _logger.PrintAirplanes(temp);
 
-            _logger.Received(1);
+            Assert.That(_logger, Is.Not.Null);
         }
         #endregion
 
