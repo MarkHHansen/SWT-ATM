@@ -86,6 +86,7 @@ namespace ATM.Unit.Test
             Assert.NotNull(valarg);
         }*/
 
+
         [Test]
         public void AirplaneInAirspaceTrue()
         {
@@ -105,11 +106,15 @@ namespace ATM.Unit.Test
 
             Assert.That(_receivedEventArgs.ConvertedData, Is.EqualTo(temp));
         }
+        #endregion
+
+
+        #region Checkairplanes
 
         [Test]
         public void NoAirplaneInAirspace()
         {
-            
+
 
             List<Airplane> temp = new List<Airplane>();
             Airplane airplane = new Airplane();
@@ -126,8 +131,10 @@ namespace ATM.Unit.Test
             Assert.That(_uut.CheckAirplaneInAirSpace(temp).IsNullOrEmpty());
         }
 
-        [Test]
-        public void TwoAirplanesOneValidated()
+        [TestCase(5, 30000, 5000)]
+        [TestCase(50000, 6, 3500)]
+        [TestCase(50000, 50000, 7)]
+        public void TwoAirplanesOneValidated_OneUnderLimit(int y, int x, int z)
         {
             Airplane airplane2 = new Airplane();
             airplane2._yCoordiante = 23456;
@@ -140,9 +147,9 @@ namespace ATM.Unit.Test
 
             List<Airplane> temp = new List<Airplane>();
             Airplane airplane = new Airplane();
-            airplane._yCoordiante = 1;
-            airplane._xCoordiante = 30000;
-            airplane._Altitude = 2000;
+            airplane._yCoordiante = y;
+            airplane._xCoordiante = x;
+            airplane._Altitude = z;
             airplane._compasCourse = 60.0;
             airplane._velocity = 1000.0;
             airplane._Time =
@@ -151,11 +158,46 @@ namespace ATM.Unit.Test
             temp.Add(airplane);
             temp.Add(airplane2);
 
-            List<Airplane> Result =new List<Airplane>();
+            List<Airplane> Result = new List<Airplane>();
             Result.Add(airplane2);
-            
+
+            Assert.That(_uut.CheckAirplaneInAirSpace(temp), Is.EqualTo(Result));
+        }
+
+        [TestCase(100000,30000,5000)]
+        [TestCase(50000,91000,3500)]
+        [TestCase(50000,50000,25000)]
+        public void TwoAirplanesOneValidated_OneOverLimit(int y, int x, int z)
+        {
+            Airplane airplane2 = new Airplane();
+            airplane2._yCoordiante = 23456;
+            airplane2._xCoordiante = 30000;
+            airplane2._Altitude = 2000;
+            airplane2._compasCourse = 60.0;
+            airplane2._velocity = 1000.0;
+            airplane2._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            List<Airplane> temp = new List<Airplane>();
+            Airplane airplane = new Airplane();
+            airplane._yCoordiante = y;
+            airplane._xCoordiante = x;
+            airplane._Altitude = z;
+            airplane._compasCourse = 60.0;
+            airplane._velocity = 1000.0;
+            airplane._Time =
+                DateTime.ParseExact("20151006123123495", "yyyyMMddhhmmssfff", CultureInfo.InvariantCulture);
+
+            temp.Add(airplane);
+            temp.Add(airplane2);
+
+            List<Airplane> Result = new List<Airplane>();
+            Result.Add(airplane2);
+
             Assert.That(_uut.CheckAirplaneInAirSpace(temp), Is.EqualTo(Result));
         }
         #endregion
+
+
     }
 }
